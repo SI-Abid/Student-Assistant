@@ -1,0 +1,37 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Student-Assistant_b54c10ac",
+            "projectPath": "C:\\Users\\User\\Desktop\\Student-Assistant\\Student-Assistant_b54c10ac",
+            "vmargs": "-Xmx1024m",
+            "programArguments": [
+                "-Djava.library.path=C:\\Users\\User\\Desktop\\Student-Assistant\\Student-Assistant_b54c10ac\\lib"
+            ],
+            "jrePath": "C:\\Program Files\\Java\\jdk1.8.0_191\\jre\\bin\\server\\jvm.dll",
+        },
+        {
+            "type": "java",
+            "name": "Run App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Student-Assistant_b54c10ac",
+            "mode": "run"
+        },
+        {
+            "type": "java",
+            "name": "Debug App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Student-Assistant_b54c10ac",
+            "mode": "debug",
+            "args": [
+                "-Xdebug",
+                "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
+            ]
+        }
+    ],
+}
