@@ -1,3 +1,6 @@
 bin
 SECRET.txt
 .vscode
+secrets.env
+setup.bat
+students.csv
