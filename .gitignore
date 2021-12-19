@@ -2,4 +2,5 @@ bin
 SECRET.txt
 secrets.env
 setup.bat
-students.csv
+*.csv
+Test.java

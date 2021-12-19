@@ -15,11 +15,19 @@
         },
         {
             "type": "java",
-            "name": "Run App",
+            "name": "Test App",
             "request": "launch",
-            "mainClass": "App",
+            "mainClass": "Test",
             "projectName": "Student-Assistant_b54c10ac",
             "mode": "run"
+        },
+        {
+            "type": "java",
+            "name": "Debug Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "Student-Assistant_b54c10ac",
+            "mode": "debug"
         },
         {
             "type": "java",
@@ -32,6 +40,6 @@
                 "-Xdebug",
                 "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
             ]
-        }
+        },
     ],
 }

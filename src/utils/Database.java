@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Database {
+
     private String DB_URL;
     private String DB_USER;
     private String DB_PASS;
@@ -14,9 +15,9 @@ public class Database {
     
     public Database(boolean isTest) {
         
-        DB_URL = System.getenv("DB_URL");
-        DB_USER = System.getenv("DB_USER");
-        DB_PASS = System.getenv("DB_PASS");
+        DB_URL = Secret.getDB_URL();
+        DB_USER = Secret.getDB_USER();
+        DB_PASS = Secret.getDB_PASS();
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,7 +37,7 @@ public class Database {
             Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             Statement stmt = con.createStatement();
 
-            // delete all tables
+            // delete students tables
             System.out.println("Deleting all tables...");
             stmt.executeUpdate("DROP TABLE IF EXISTS students");
 
@@ -86,5 +87,29 @@ public class Database {
             System.out.println(e);
         }
         return null;
+    }
+    /**
+     * 
+     * @param tableName
+     * @param attr
+     * @param value
+     * @param id
+     * 
+     * @return true if update successful
+     * 
+     */
+    public boolean updateAttr(String tableName, String attr, String value, String id) {
+        try {
+            // Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE " + tableName + " SET " + attr + " = '" + value + "' WHERE id = '" + id + "'");
+            stmt.close();
+            con.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 }
