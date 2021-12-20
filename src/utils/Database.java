@@ -30,7 +30,7 @@ public class Database {
         }
     }
 
-    protected void init() {
+    public void init() {
 
         // delete("students", new String[] { "2123456789" });
         // insert("students", new String[] { "2123456789", "Mahir Afnan",
@@ -48,7 +48,15 @@ public class Database {
         // create users table if not exists
         try {
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS users (username VARCHAR(20), password VARCHAR(30), fullname VARCHAR(50), email VARCHAR(50), PRIMARY KEY (username))");
-            insert("users", new String[] { "root", "toor", "Admin Root", "admin@su.org" });
+            // insert("users", new String[] { "root", "toor", "Admin Root", "admin@su.org" });
+            ResultSet rs = statement.executeQuery("SELECT * FROM users");
+            while (rs.next()) {
+                System.out.println(rs.getString("username"));
+                System.out.println(rs.getString("password"));
+                System.out.println(rs.getString("fullname"));
+                System.out.println(rs.getString("email"));
+            }
+            rs.close();
         }
         catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());

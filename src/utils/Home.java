@@ -11,7 +11,7 @@ import components.LoginPanel;
 public class Home {
     
     private JFrame frame;
-    private int width = 500;
+    private int width = 700;
     private int height = 600;
 
     public Home() {

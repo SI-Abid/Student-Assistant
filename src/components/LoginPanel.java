@@ -56,14 +56,15 @@ public class LoginPanel {
     public JPanel getPanel() {
         return panel;
     }
-    
+
     public void login() {
         if(username.getText().equals("") || password.getPassword().toString().equals("")) {
             JOptionPane.showMessageDialog(null, "Please fill in all the fields", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         User user = new User();
-        user.login(username.getText(), password.getPassword().toString());
+        user.login(username.getText(), String.copyValueOf(password.getPassword()));
+        
         if(user.isVerified()) {
             JOptionPane.showMessageDialog(null, "Login Successful");
             panel.setVisible(false);
