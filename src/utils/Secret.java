@@ -6,7 +6,7 @@ public class Secret {
     
     public static String getLoginCreds() {
         try {
-            FileInputStream fis = new FileInputStream("creds.csv");
+            FileInputStream fis = new FileInputStream(".csv");
             byte[] data = new byte[fis.available()];
             fis.read(data);
             fis.close();

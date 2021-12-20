@@ -18,7 +18,7 @@
             "name": "Test App",
             "request": "launch",
             "mainClass": "Test",
-            "projectName": "Student-Assistant_b54c10ac",
+            // "projectName": "Student-Assistant_b54c10ac",
             "mode": "run"
         },
         {

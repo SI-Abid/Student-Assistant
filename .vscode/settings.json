@@ -3,5 +3,13 @@
         "lib",
         "src"
     ],
-    "java.project.outputPath": "bin"
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "lib/Database.jar"
+        ]
+    }
 }

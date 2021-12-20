@@ -4,12 +4,6 @@ import utils.Home;
 public class App {
     public static void main(String[] args) throws Exception {
         
-        Database db = new Database();
-        
-        String columns[] = {"Student ID", "Full Name", "Personal Email"};
-
-        Home home = new Home();
-        home.addTable("Students Table", columns, db.getTable("students"));
-        home.show();
+        System.out.println("Welcome to the our app!");
     }
 }
