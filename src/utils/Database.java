@@ -1,17 +1,5 @@
 package utils;
 
-import java.sql.*;
-import java.util.ArrayList;
-
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-import org.bson.Document;
-
 /**
  * This class is used to connect to the database and execute queries.
  * 
@@ -22,62 +10,11 @@ import org.bson.Document;
 
 public class Database {
 
-    private final String DB_URL = "jdbc:mysql://sql6.freesqldatabase.com:3306/sql6459007";
-    private final String DB_USER = "sql6459007";
-    private final String DB_PASS = "bAXluqI4Sv";
-    private final String connString = "mongodb+srv://abid:siahio5323@cluster9.lw254.mongodb.net/Project_SA?retryWrites=true&w=majority";
-    private Statement statement;
-
-    // public Database() {
-    //     try {
-
-    //         Class.forName("com.mysql.cj.jdbc.Driver");
-    //         Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-    //         statement = connection.createStatement();
-    //     } catch (Exception e) {
-    //         System.out.println("Error: " + e.getMessage());
-    //     }
-    // }
-
-    public void init() {
-
-        // ConnectionString connectionString = new ConnectionString(connString);
-        // MongoClientSettings settings = MongoClientSettings.builder()
-        //         .applyConnectionString(connectionString)
-        //         .build();
-        // MongoClient client = MongoClients.create(settings);
-        // MongoDatabase database = client.getDatabase("Project_SA");
-
-        MongoClient client = MongoClients.create(connString);
-        MongoDatabase database = client.getDatabase("Project_SA");
-        MongoCollection<Document> collection = database.getCollection("users");
+    public Database() {
         
-        System.out.println("Connected to database");
-
-        // collection.insertOne(new Document("name", "Saiham"));
-
-        // System.out.println("Inserted");
-
-        // delete one document
-        collection.deleteOne(new Document("name", "Saiham"));
-
-        for(Document doc : collection.find()) {
-            for(String key : doc.keySet()) {
-                System.out.println(key + ": " + doc.get(key));
-            }
-        }
-
-
-        // database.createCollection("users");
-
-        // // add a document to the collection using a Document
-        // // root, toor, Admin Root, admin@su.org
-        // database.getCollection("users").insertOne(new Document("username", "root")
-        //         .append("password", "toor")
-        //         .append("fullname", "Admin Root")
-        //         .append("email", "admin@su.org"));
-
+        
     }
+
 
     // public void init() {
 

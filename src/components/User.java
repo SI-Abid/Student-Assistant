@@ -1,7 +1,6 @@
 package components;
 
 import utils.Auth;
-import utils.Database;
 
 public class User {
 
