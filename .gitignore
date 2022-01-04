@@ -1,6 +1,0 @@
-bin
-SECRET.txt
-secrets.env
-setup.bat
-*.csv
-Test.java
