@@ -1,6 +1,9 @@
 package components;
 
 import javax.swing.*;
+
+import utils.Home;
+
 import java.awt.*;
 
 public class LoginPanel {
@@ -19,7 +22,7 @@ public class LoginPanel {
         panel = new JPanel();
         panel.setSize(width, height);
         panel.setLayout(null);
-        // panel.setBackground(Color.WHITE);
+        panel.setBackground(new Color(255, 255, 255, 20));
 
         usernameLabel = new JLabel("Username");
         usernameLabel.setBounds(60, 80, 100, 20);
@@ -51,6 +54,8 @@ public class LoginPanel {
         panel.add(login);
 
         login.addActionListener(l -> login());
+
+
     }
 
     public JPanel getPanel() {
@@ -58,16 +63,20 @@ public class LoginPanel {
     }
 
     public void login() {
-        if(username.getText().equals("") || password.getPassword().toString().equals("")) {
+        if(username.getText().equals("") || String.copyValueOf(password.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(null, "Please fill in all the fields", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
         User user = new User();
         user.login(username.getText(), String.copyValueOf(password.getPassword()));
         
         if(user.isVerified()) {
             JOptionPane.showMessageDialog(null, "Login Successful");
-            panel.setVisible(false);
+                panel.setVisible(false);
+                new ClockPanel();
+                Home.addPanel(ClockPanel.getPanel());
+        //     panel.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");
         }

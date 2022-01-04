@@ -16,7 +16,7 @@ public class User {
         isLoggedIn=Auth.passwordAuth(username, password);
         
         if(isLoggedIn) {
-            String[] data = new Database().getUserInfo(username);
+            String[] data = Auth.getUserInfo(username);
             this.Username = username;
             this.Password = password;
             this.FullName = data[2];
@@ -25,9 +25,9 @@ public class User {
     }
 
     public boolean register(String fullName, String username, String password, String email) {
-        Database db = new Database();
+        // Database db = new Database();
 
-        if (db.isRegistered(email)) {
+        if (Auth.isRegistered(email)) {
             return false;
         }
         
@@ -37,7 +37,8 @@ public class User {
         data[2] = fullName;
         data[3] = email;
 
-        return db.insert("users", data);
+        return true;
+        // return db.insert("users", data);
     }
 
     public boolean isVerified() {

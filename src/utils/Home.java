@@ -10,9 +10,9 @@ import components.LoginPanel;
 
 public class Home {
     
-    private JFrame frame;
-    private int width = 700;
-    private int height = 600;
+    private static JFrame frame;
+    private static int width = 700;
+    private static int height = 600;
 
     public Home() {
 
@@ -23,7 +23,7 @@ public class Home {
         frame.setResizable(false);
         frame.setLayout(null);
         
-        // add image
+        // add image to frame background
         ImageIcon img = new ImageIcon("src/images/background.jpg");
         Image image = img.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         img = new ImageIcon(image);
@@ -33,7 +33,6 @@ public class Home {
         bgPanel.setLayout(null);
         bgPanel.setBounds(0, 0, width, height);
         bgPanel.add(background);
-        // frame.add(background);
         
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, width, height);
@@ -50,6 +49,11 @@ public class Home {
         layeredPane.add(bgPanel);
 
         frame.setVisible(true);
+    }
+    public static void addPanel(JPanel panel) {
+        frame.add(panel);
+        // panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
+        // panel.setOpaque(false);
     }
     
 }

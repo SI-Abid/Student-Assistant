@@ -3,6 +3,15 @@ package utils;
 import java.sql.*;
 import java.util.ArrayList;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
+
 /**
  * This class is used to connect to the database and execute queries.
  * 
@@ -16,21 +25,61 @@ public class Database {
     private final String DB_URL = "jdbc:mysql://sql6.freesqldatabase.com:3306/sql6459007";
     private final String DB_USER = "sql6459007";
     private final String DB_PASS = "bAXluqI4Sv";
+    private final String connString = "mongodb+srv://abid:siahio5323@cluster9.lw254.mongodb.net/Project_SA?retryWrites=true&w=majority";
     private Statement statement;
 
-    public Database() {
-        try {
-            
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            statement = connection.createStatement();
-        }
-        catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
+    // public Database() {
+    //     try {
+
+    //         Class.forName("com.mysql.cj.jdbc.Driver");
+    //         Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+    //         statement = connection.createStatement();
+    //     } catch (Exception e) {
+    //         System.out.println("Error: " + e.getMessage());
+    //     }
+    // }
 
     public void init() {
+
+        // ConnectionString connectionString = new ConnectionString(connString);
+        // MongoClientSettings settings = MongoClientSettings.builder()
+        //         .applyConnectionString(connectionString)
+        //         .build();
+        // MongoClient client = MongoClients.create(settings);
+        // MongoDatabase database = client.getDatabase("Project_SA");
+
+        MongoClient client = MongoClients.create(connString);
+        MongoDatabase database = client.getDatabase("Project_SA");
+        MongoCollection<Document> collection = database.getCollection("users");
+        
+        System.out.println("Connected to database");
+
+        // collection.insertOne(new Document("name", "Saiham"));
+
+        // System.out.println("Inserted");
+
+        // delete one document
+        collection.deleteOne(new Document("name", "Saiham"));
+
+        for(Document doc : collection.find()) {
+            for(String key : doc.keySet()) {
+                System.out.println(key + ": " + doc.get(key));
+            }
+        }
+
+
+        // database.createCollection("users");
+
+        // // add a document to the collection using a Document
+        // // root, toor, Admin Root, admin@su.org
+        // database.getCollection("users").insertOne(new Document("username", "root")
+        //         .append("password", "toor")
+        //         .append("fullname", "Admin Root")
+        //         .append("email", "admin@su.org"));
+
+    }
+
+    // public void init() {
 
         // delete("students", new String[] { "2123456789" });
         // insert("students", new String[] { "2123456789", "Mahir Afnan",
@@ -38,190 +87,213 @@ public class Database {
         // update("students", "id", "2123456789", "name", "Sharif Adnan");
         // for (String[] row : getTable("students")) {
 
-        //     System.out.print(String.format("|%12s |", row[0]));
-        //     System.out.print(String.format("|%32s |", row[1]));
-        //     System.out.println(String.format("|%27s |", row[2]));
-        //     for (int i = 0; i < 80; i++)
-        //         System.out.print("-");
-        //     System.out.println();
+        // System.out.print(String.format("|%12s |", row[0]));
+        // System.out.print(String.format("|%32s |", row[1]));
+        // System.out.println(String.format("|%27s |", row[2]));
+        // for (int i = 0; i < 80; i++)
+        // System.out.print("-");
+        // System.out.println();
         // }
         // create users table if not exists
-        try {
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users (username VARCHAR(20), password VARCHAR(30), fullname VARCHAR(50), email VARCHAR(50), PRIMARY KEY (username))");
-            // insert("users", new String[] { "root", "toor", "Admin Root", "admin@su.org" });
-            ResultSet rs = statement.executeQuery("SELECT * FROM users");
-            while (rs.next()) {
-                System.out.println(rs.getString("username"));
-                System.out.println(rs.getString("password"));
-                System.out.println(rs.getString("fullname"));
-                System.out.println(rs.getString("email"));
-            }
-            rs.close();
-        }
-        catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
+        // try {
+        // statement.executeUpdate("CREATE TABLE IF NOT EXISTS users (username
+        // VARCHAR(20), password VARCHAR(30), fullname VARCHAR(50), email VARCHAR(50),
+        // PRIMARY KEY (username))");
+        // // insert("users", new String[] { "root", "toor", "Admin Root",
+        // "admin@su.org" });
+        // ResultSet rs = statement.executeQuery("SELECT * FROM users");
+        // while (rs.next()) {
+        // System.out.println(rs.getString("username"));
+        // System.out.println(rs.getString("password"));
+        // System.out.println(rs.getString("fullname"));
+        // System.out.println(rs.getString("email"));
+        // }
+        // rs.close();
+        // }
+        // catch (SQLException e) {
+        // System.out.println("Error: " + e.getMessage());
+        // }
+        //
+        // String url =
+        // "https://data.mongodb-api.com/app/data-jbntr/endpoint/data/beta";
+        // String apiKey =
+        // "I0MIJkvOFXbbtsvALSidVBlsNZQfg2FV5H44idXBUFB5gnuT0E6LpWaHvWLH2D4K";
+        // String collection = "users";
+        // String query = "{\"query\":\"{\\\"username\\\":\\\"root\\\"}\"}";
+        // String response = "";
+        // try {
+        // response = HttpRequest.newBuilder()
+        // .uri(new java.net.URI(url))
+        // .header("x-mongo-api-key", apiKey)
+        // .header("content-type", "application/json")
+        // .POST(HttpRequest.BodyPublishers.ofString(query))
+        // .build()
+        // .bodyPublisher()
+        // .toString();
+        // }
+        // catch (Exception e) {
+        // System.out.println("Error: " + e.getMessage());
+        // }
+    // }
 
-    /**
-     * 
-     * @param tableName
-     * @return the table as an array of strings
-     */
-    public ArrayList<String[]> getTable(String tableName) {
+//     /**
+//      * 
+//      * @param tableName
+//      * @return the table as an array of strings
+//      */
+//     public ArrayList<String[]> getTable(String tableName) {
 
-        ArrayList<String[]> table = new ArrayList<String[]>();
+//         ArrayList<String[]> table = new ArrayList<String[]>();
 
-        try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);
-            while (resultSet.next()) {
+//         try {
+//             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);
+//             while (resultSet.next()) {
 
-                String[] row = new String[resultSet.getMetaData().getColumnCount()];
-                for (int i = 0; i < row.length; i++) {
+//                 String[] row = new String[resultSet.getMetaData().getColumnCount()];
+//                 for (int i = 0; i < row.length; i++) {
 
-                    row[i] = resultSet.getString(i + 1);
-                }
-                table.add(row);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return table;
-    }
+//                     row[i] = resultSet.getString(i + 1);
+//                 }
+//                 table.add(row);
+//             }
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//         }
+//         return table;
+//     }
 
-    /**
-     * 
-     * @param tableName
-     * @param values
-     * @return true if the insertion was successful
-     */
-    public boolean insert(String tableName, String[] values) {
+//     /**
+//      * 
+//      * @param tableName
+//      * @param values
+//      * @return true if the insertion was successful
+//      */
+//     public boolean insert(String tableName, String[] values) {
 
-        String query = "INSERT INTO " + tableName + " VALUES (";
+//         String query = "INSERT INTO " + tableName + " VALUES (";
 
-        for (int i = 0; i < values.length; i++) {
-            query += "'" + values[i] + "'";
+//         for (int i = 0; i < values.length; i++) {
+//             query += "'" + values[i] + "'";
 
-            if (i != values.length - 1) {
-                query += ", ";
-            }
-        }
-        query += ")";
-        // System.out.println(query);
-        try {
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
+//             if (i != values.length - 1) {
+//                 query += ", ";
+//             }
+//         }
+//         query += ")";
+//         // System.out.println(query);
+//         try {
+//             statement.executeUpdate(query);
+//         } catch (SQLException e) {
+//             // e.printStackTrace();
+//             return false;
+//         }
+//         return true;
+//     }
 
-    /**
-     * This method is used to delete rows from the table.
-     * 
-     * @param tableName The name of the table.
-     * @param values    Rows with the values to be deleted.
-     * @param field     The field to be used to find matching records.
-     * @return true if the deletion was successful.
-     */
-    public boolean delete(String tableName, String field, String[] values) {
+//     /**
+//      * This method is used to delete rows from the table.
+//      * 
+//      * @param tableName The name of the table.
+//      * @param values    Rows with the values to be deleted.
+//      * @param field     The field to be used to find matching records.
+//      * @return true if the deletion was successful.
+//      */
+//     public boolean delete(String tableName, String field, String[] values) {
 
-        String query = "DELETE FROM " + tableName + " WHERE ";
+//         String query = "DELETE FROM " + tableName + " WHERE ";
 
-        for (int i = 0; i < values.length; i++) {
-            query += field + " = " + values[i];
+//         for (int i = 0; i < values.length; i++) {
+//             query += field + " = " + values[i];
 
-            if (i != values.length - 1) {
-                query += " OR ";
-            }
-        }
-        // System.out.println(query);
-        try {
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
+//             if (i != values.length - 1) {
+//                 query += " OR ";
+//             }
+//         }
+//         // System.out.println(query);
+//         try {
+//             statement.executeUpdate(query);
+//         } catch (SQLException e) {
+//             // e.printStackTrace();
+//             return false;
+//         }
+//         return true;
+//     }
 
-    /**
-     * 
-     * updates the table with the given column name and column value
-     * 
-     * @param tableName
-     * @param columnName
-     * @param columnValue
-     * @param updateColumnName
-     * @param updateColumnValue
-     * @return true if the update was successful
-     * 
-     */
-    public boolean update(String tableName, String columnName, String columnValue, String updateColumnName,
-            String updateColumnValue) {
+//     /**
+//      * 
+//      * updates the table with the given column name and column value
+//      * 
+//      * @param tableName
+//      * @param columnName
+//      * @param columnValue
+//      * @param updateColumnName
+//      * @param updateColumnValue
+//      * @return true if the update was successful
+//      * 
+//      */
+//     public boolean update(String tableName, String columnName, String columnValue, String updateColumnName,
+//             String updateColumnValue) {
 
-        String query = "UPDATE " + tableName + " SET " + updateColumnName + " = '" + updateColumnValue + "' WHERE "
-                + columnName + " = '" + columnValue + "'";
-        // System.out.println(query);
-        try {
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-    /**
-     * 
-     * @param username
-     * @return the password of the user if the user exists, otherwise returns null
-     */
-    public String getPassword(String username) {
-        try {
-            // Class.forName("com.mysql.cj.jdbc.Driver");
-            ResultSet rs = statement.executeQuery("SELECT password FROM users WHERE username = '" + username + "'");
-            if (rs.next()) {
-                String password = rs.getString("password");
-                rs.close();
-                return password;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
+//         String query = "UPDATE " + tableName + " SET " + updateColumnName + " = '" + updateColumnValue + "' WHERE "
+//                 + columnName + " = '" + columnValue + "'";
+//         // System.out.println(query);
+//         try {
+//             statement.executeUpdate(query);
+//         } catch (SQLException e) {
+//             // e.printStackTrace();
+//             return false;
+//         }
+//         return true;
+//     }
 
-    public String[] getUserInfo(String username) {
-        try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE username = '" + username + "'");
-            if (rs.next()) {
-                String[] userInfo = new String[4];
-                userInfo[0] = rs.getString("username");
-                userInfo[1] = rs.getString("password");
-                userInfo[2] = rs.getString("fullname");
-                userInfo[3] = rs.getString("email");
-                rs.close();
-                return userInfo;
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
+//     /**
+//      * 
+//      * @param username
+//      * @return the password of the user if the user exists, otherwise returns null
+//      */
+//     public String getPassword(String username) {
+//         try {
+//             // Class.forName("com.mysql.cj.jdbc.Driver");
+//             ResultSet rs = statement.executeQuery("SELECT password FROM users WHERE username = '" + username + "'");
+//             if (rs.next()) {
+//                 String password = rs.getString("password");
+//                 rs.close();
+//                 return password;
+//             }
+//         } catch (Exception e) {
+//             System.out.println(e);
+//         }
+//         return null;
+//     }
 
-    public boolean isRegistered(String email) {
-        try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE email = '" + email + "'");
-            if (rs.next()) {
-                rs.close();
-                return true;
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        return false;
-    }
+//     public String[] getUserInfo(String username) {
+//         try {
+//             ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE username = '" + username + "'");
+//             if (rs.next()) {
+//                 String[] userInfo = new String[4];
+//                 userInfo[0] = rs.getString("username");
+//                 userInfo[1] = rs.getString("password");
+//                 userInfo[2] = rs.getString("fullname");
+//                 userInfo[3] = rs.getString("email");
+//                 rs.close();
+//                 return userInfo;
+//             }
+//         } catch (Exception e) {
+//             System.out.println(e);
+//         }
+//         return null;
+//     }
+
+//     public boolean isRegistered(String email) {
+//         try {
+//             ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE email = '" + email + "'");
+//             if (rs.next()) {
+//                 rs.close();
+//                 return true;
+//             }
+//         } catch (Exception e) {
+//             System.out.println(e);
+//         }
+//         return false;
+//     }
 }
