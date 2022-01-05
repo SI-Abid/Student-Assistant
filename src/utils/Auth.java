@@ -26,9 +26,6 @@ public class Auth {
     }
 
     public static boolean passwordAuth(String username, String password) {
-        // MongoClient client = MongoClients.create(Dotenv.load().get("CONNECTION_STRING"));
-        // MongoDatabase database = client.getDatabase(Dotenv.load().get("DATABASE"));
-        // MongoCollection<Document> collection = database.getCollection("user_info");
         Document doc = users.find(Filters.eq("username", username)).first();
         if (doc == null) {
             return false;

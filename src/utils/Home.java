@@ -39,7 +39,7 @@ public class Home {
         frame.add(layeredPane);
         
         // frame.add(tabbedPane);
-        JPanel panel = new LoginPanel().getPanel();
+        JPanel panel = new RegisterPanel().getPanel();
         //////////////
         panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
         panel.setOpaque(false);
@@ -52,8 +52,6 @@ public class Home {
     }
     public static void addPanel(JPanel panel) {
         frame.add(panel);
-        // panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
-        // panel.setOpaque(false);
     }
     
 }
