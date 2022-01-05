@@ -1,20 +1,9 @@
-import io.github.cdimascio.dotenv.Dotenv;
+import utils.Auth;
 import utils.Home;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-
-import org.bson.Document;
 
 public class Test {
    public static void main(String[] args) throws Exception {
@@ -57,6 +46,7 @@ public class Test {
         //             .append(heading[2], data.length > 2 ? data[2] : null);
         //     collection.insertOne(doc);
         // }
+        new Auth();
         new Home();
         System.out.println("Hello World!");
     }

@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import components.LoginPanel;
+import components.RegisterPanel;
 
 public class Home {
     
