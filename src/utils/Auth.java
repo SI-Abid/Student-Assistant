@@ -47,14 +47,14 @@ public class Auth {
     public static boolean isRegistered(String email, String username) {
         
         Document doc = users.find(Filters.eq("email", email)).first();
-        if (doc == null) {
-            return false;
+        if (doc != null) {
+            return true;
         }
         doc = users.find(Filters.eq("username", username)).first();
-        if (doc == null) {
-            return false;
+        if (doc != null) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static boolean addNewUser(String username, String password, String fullname, String email) {

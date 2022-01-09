@@ -51,6 +51,7 @@ public class LoginPanel {
 
         login = new JButton("Login");
         login.setBounds(160, 150, 100, 30);
+        login.setFont(new Font("Arial", Font.PLAIN, 16));
         panel.add(login);
 
         login.addActionListener(l -> login());
