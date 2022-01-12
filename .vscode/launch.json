@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CreateAccount",
+            "request": "launch",
+            "mainClass": "CreateAccount",
+            "projectName": "Student-Assistant_9e4ff290"
+        },
+        {
+            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "App",
@@ -11,14 +18,13 @@
             "programArguments": [
                 "-Djava.library.path=C:\\Users\\User\\Desktop\\Student-Assistant\\Student-Assistant_b54c10ac\\lib"
             ],
-            "jrePath": "C:\\Program Files\\Java\\jdk1.8.0_191\\jre\\bin\\server\\jvm.dll",
+            "jrePath": "C:\\Program Files\\Java\\jdk1.8.0_191\\jre\\bin\\server\\jvm.dll"
         },
         {
             "type": "java",
             "name": "Test App",
             "request": "launch",
             "mainClass": "Test",
-            // "projectName": "Student-Assistant_b54c10ac",
             "mode": "run"
         },
         {
@@ -40,6 +46,6 @@
                 "-Xdebug",
                 "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
             ]
-        },
+        }
     ],
 }
