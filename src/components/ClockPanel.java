@@ -21,7 +21,7 @@ public class ClockPanel {
         // round panel corners
         clock.setBounds(width / 2 - 100, height / 2 - 50, 200, 100);
         clock.setFont(new Font("Arial", Font.PLAIN, 30));
-        clock.setForeground(Color.BLACK);
+        clock.setForeground(Color.WHITE);
         panel.add(clock);
         // panel.setOpaque(false);
 

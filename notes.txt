@@ -1,0 +1,8 @@
+nijer part update korte ja kora lage
+- fetch upstream
+- pull
+
+nijer contribution share korte ja kora lage
+- commit
+- push
+- pull request
