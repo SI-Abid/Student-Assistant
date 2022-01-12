@@ -6,10 +6,12 @@ import java.awt.*;
 import javax.swing.*;
 
 import components.LoginPanel;
+import components.RegisterPanel;
 
 public class Home {
     
     private static JFrame frame;
+    private static JLayeredPane layeredPane;
     private static int width = 700;
     private static int height = 600;
 
@@ -33,26 +35,29 @@ public class Home {
         bgPanel.setBounds(0, 0, width, height);
         bgPanel.add(background);
         
-        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, width, height);
         frame.add(layeredPane);
         
         // frame.add(tabbedPane);
-        JPanel panel = new LoginPanel().getPanel();
-        //////////////
-        panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
-        panel.setOpaque(false);
-        frame.add(panel);
+        // JPanel panel = new LoginPanel().getPanel();
+        // //////////////
+        // panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
+        // frame.add(panel);
+        
+        // layeredPane.add(panel);
+        addPanel(new LoginPanel().getPanel());
 
-        layeredPane.add(panel);
         layeredPane.add(bgPanel);
-
+        
         frame.setVisible(true);
     }
     public static void addPanel(JPanel panel) {
-        frame.add(panel);
-        // panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
-        // panel.setOpaque(false);
+        // layeredPane.remove(0);
+        layeredPane.add(panel);
+        layeredPane.moveToFront(panel);
+        panel.setBounds(width/2-panel.getWidth()/2, height/2-panel.getHeight()/2-30, panel.getWidth(), panel.getHeight());
+        panel.setOpaque(false);
     }
     
 }
