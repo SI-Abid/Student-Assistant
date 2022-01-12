@@ -5,6 +5,8 @@ import java.awt.Color;
 
 import javax.swing.*;
 
+import utils.Home;
+
 public class RegisterPanel {
     JPanel panel;
     JTextField fullname;
@@ -94,13 +96,26 @@ public class RegisterPanel {
         panel.add(confirmPassword);
 
         register = new JButton("Register");
-        register.setBounds(170, 230, 100, 30);
-        register.setBackground(Color.LIGHT_GRAY);
+        register.setBounds(170, 220, 100, 25);
         register.setForeground(Color.BLACK);
-        register.setFont(new Font("Arial", Font.PLAIN, 16));
+        register.setFont(new Font("Arial", Font.PLAIN, 15));
         panel.add(register);
+
+        JButton loginLink = new JButton("Already have an account?");
+        loginLink.setBounds(startX+45, register.getY()+30, 220, 20);
+        loginLink.setBackground(Color.LIGHT_GRAY);
+        loginLink.setForeground(Color.BLACK);
+        loginLink.setFont(new Font("Arial", Font.PLAIN, 14));
+        panel.add(loginLink);
         
         register.addActionListener(l -> register());
+
+        loginLink.addActionListener(l -> getLoginPanel());
+    }
+
+    public void getLoginPanel() {
+        panel.setVisible(false);
+        Home.addPanel(new LoginPanel().getPanel());
     }
 
     public JPanel getPanel() {

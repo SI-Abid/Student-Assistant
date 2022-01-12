@@ -12,6 +12,7 @@ public class LoginPanel {
     JTextField username;
     JPasswordField password;
     JButton login;
+    JButton register;
     JLabel usernameLabel;
     JLabel passwordLabel;
     int width = 400;
@@ -54,8 +55,19 @@ public class LoginPanel {
         login.setFont(new Font("Arial", Font.PLAIN, 16));
         panel.add(login);
 
-        login.addActionListener(l -> login());
+        JLabel registerLabel = new JLabel("Don't have an account?");
+        registerLabel.setBounds(60, 190, 200, 20);
+        registerLabel.setForeground(Color.LIGHT_GRAY);
+        panel.add(registerLabel);
 
+        register = new JButton("Register");
+        register.setBounds(230, 190, 100, 20);
+        register.setFont(new Font("Arial", Font.PLAIN, 14));
+        register.setBackground(Color.LIGHT_GRAY);
+        panel.add(register);
+
+        login.addActionListener(l -> login());
+        register.addActionListener(l -> getRegisterPanel());
 
     }
 
@@ -77,9 +89,16 @@ public class LoginPanel {
                 panel.setVisible(false);
                 new ClockPanel();
                 Home.addPanel(ClockPanel.getPanel());
+                Home.addPanel(user.getPanel());
         //     panel.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");
         }
+    }
+
+    public void getRegisterPanel() {
+        panel.setVisible(false);
+        // new RegisterPanel();
+        Home.addPanel(new RegisterPanel().getPanel());
     }
 }
