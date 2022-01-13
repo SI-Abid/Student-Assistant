@@ -1,10 +1,11 @@
 package components;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
 import javax.swing.*;
 
 public class ClockPanel {
-    
+
     static JLabel clock;
     static JPanel panel;
     int width = 400;
@@ -17,7 +18,7 @@ public class ClockPanel {
         panel.setSize(width, height);
         panel.setLayout(null);
         // panel.setBackground(new Color(255, 255, 255, 20));
-        
+
         // round panel corners
         clock.setBounds(width / 2 - 100, height / 2 - 50, 200, 100);
         clock.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -38,5 +39,5 @@ public class ClockPanel {
         clock = new JLabel(time);
         // clock.setText(time);
     }
-    
+
 }

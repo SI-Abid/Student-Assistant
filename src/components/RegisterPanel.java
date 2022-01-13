@@ -8,6 +8,7 @@ import javax.swing.*;
 import utils.Home;
 
 public class RegisterPanel {
+
     JPanel panel;
     JTextField fullname;
     JTextField username;
@@ -26,6 +27,7 @@ public class RegisterPanel {
     int labelWidth = 100;
     int startX = 70;
     int startY = 60;
+
     public RegisterPanel() {
         panel = new JPanel();
         panel.setSize(width, height);
@@ -38,7 +40,7 @@ public class RegisterPanel {
         panel.add(fullnameLabel);
 
         fullname = new JTextField(15);
-        fullname.setBounds(startX+labelWidth+GAP, startY, 200, 20);
+        fullname.setBounds(startX + labelWidth + GAP, startY, 200, 20);
         fullname.setFont(new Font("Arial", Font.PLAIN, 14));
         fullname.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         fullname.setBackground(Color.LIGHT_GRAY);
@@ -46,12 +48,12 @@ public class RegisterPanel {
         panel.add(fullname);
 
         usernameLabel = new JLabel("Username");
-        usernameLabel.setBounds(startX, fullnameLabel.getY()+30, 150, 20);
+        usernameLabel.setBounds(startX, fullnameLabel.getY() + 30, 150, 20);
         usernameLabel.setForeground(Color.LIGHT_GRAY);
         panel.add(usernameLabel);
 
         username = new JTextField(15);
-        username.setBounds(startX+labelWidth+GAP, usernameLabel.getY(), 200, 20);
+        username.setBounds(startX + labelWidth + GAP, usernameLabel.getY(), 200, 20);
         username.setFont(new Font("Arial", Font.PLAIN, 14));
         username.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         username.setBackground(Color.LIGHT_GRAY);
@@ -59,12 +61,12 @@ public class RegisterPanel {
         panel.add(username);
 
         emailLabel = new JLabel("Email");
-        emailLabel.setBounds(startX, usernameLabel.getY()+30, 100, 20);
+        emailLabel.setBounds(startX, usernameLabel.getY() + 30, 100, 20);
         emailLabel.setForeground(Color.LIGHT_GRAY);
         panel.add(emailLabel);
 
         email = new JTextField(15);
-        email.setBounds(startX+labelWidth+GAP, emailLabel.getY(), 200, 20);
+        email.setBounds(startX + labelWidth + GAP, emailLabel.getY(), 200, 20);
         email.setFont(new Font("Arial", Font.PLAIN, 14));
         email.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         email.setBackground(Color.LIGHT_GRAY);
@@ -72,24 +74,24 @@ public class RegisterPanel {
         panel.add(email);
 
         passwordLabel = new JLabel("Password");
-        passwordLabel.setBounds(startX, emailLabel.getY()+30, 100, 20);
+        passwordLabel.setBounds(startX, emailLabel.getY() + 30, 100, 20);
         passwordLabel.setForeground(Color.LIGHT_GRAY);
         panel.add(passwordLabel);
 
         password = new JPasswordField(20);
-        password.setBounds(startX+labelWidth+GAP, passwordLabel.getY(), 200, 20);
+        password.setBounds(startX + labelWidth + GAP, passwordLabel.getY(), 200, 20);
         password.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         password.setBackground(Color.LIGHT_GRAY);
         password.setForeground(Color.BLACK);
         panel.add(password);
 
         confirmPasswordLabel = new JLabel("Confirm Password");
-        confirmPasswordLabel.setBounds(40, passwordLabel.getY()+30, 150, 20);
+        confirmPasswordLabel.setBounds(40, passwordLabel.getY() + 30, 150, 20);
         confirmPasswordLabel.setForeground(Color.LIGHT_GRAY);
         panel.add(confirmPasswordLabel);
 
         confirmPassword = new JPasswordField(20);
-        confirmPassword.setBounds(startX+labelWidth+GAP, confirmPasswordLabel.getY(), 200, 20);
+        confirmPassword.setBounds(startX + labelWidth + GAP, confirmPasswordLabel.getY(), 200, 20);
         confirmPassword.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         confirmPassword.setBackground(Color.LIGHT_GRAY);
         confirmPassword.setForeground(Color.BLACK);
@@ -102,12 +104,12 @@ public class RegisterPanel {
         panel.add(register);
 
         JButton loginLink = new JButton("Already have an account?");
-        loginLink.setBounds(startX+45, register.getY()+30, 220, 20);
+        loginLink.setBounds(startX + 45, register.getY() + 30, 220, 20);
         loginLink.setBackground(Color.LIGHT_GRAY);
         loginLink.setForeground(Color.BLACK);
         loginLink.setFont(new Font("Arial", Font.PLAIN, 14));
         panel.add(loginLink);
-        
+
         register.addActionListener(l -> register());
 
         loginLink.addActionListener(l -> getLoginPanel());
@@ -136,7 +138,7 @@ public class RegisterPanel {
             if (new User().register(fullname, username, password, email)) {
                 JOptionPane.showMessageDialog(null, "Registration Successful");
                 panel.setVisible(false);
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Registration Failed");
             }

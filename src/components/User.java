@@ -1,7 +1,8 @@
 package components;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.Color;
+
+import javax.swing.*;
 
 import utils.Auth;
 
@@ -9,7 +10,6 @@ public class User {
 
     String FullName;
     String Username;
-    String Password;
     String Email;
     boolean isLoggedIn=false;
     JPanel userPanel;
@@ -20,10 +20,9 @@ public class User {
         
         if(isLoggedIn) {
             String[] data = Auth.getUserInfo(username);
-            this.Username = username;
-            this.Password = password;
-            this.FullName = data[2];
-            this.Email = data[3];
+            this.Username = data[0];
+            this.FullName = data[1];
+            this.Email = data[2];
         }
     }
 
@@ -43,12 +42,18 @@ public class User {
     public JPanel getPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setSize(100, 50);
+        panel.setSize(200, 100);
         panel.setBounds(0, 0, 200, 200);
 
         JLabel label = new JLabel("Welcome " + this.FullName);
-        label.setBounds(10, 10, 200, 20);
+        label.setForeground(Color.WHITE);
+        label.setBounds(0, 15, 200, 20);
         panel.add(label);
+
+        JLabel label2 = new JLabel("Username: " + this.Username);
+        label2.setForeground(Color.WHITE);
+        label2.setBounds(0, 40, 200, 20);
+        panel.add(label2);
 
         return panel;
     }

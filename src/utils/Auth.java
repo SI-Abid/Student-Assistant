@@ -16,7 +16,7 @@ public class Auth {
     private static MongoDatabase database;
     private static MongoCollection<Document> users;
 
-    public Auth() {
+    static { 
         Dotenv env = Dotenv.load();
         String connString = env.get("CONNECTION_STRING");
         String db = env.get("DATABASE");
@@ -27,6 +27,7 @@ public class Auth {
 
     public static boolean passwordAuth(String username, String password) {
         Document doc = users.find(Filters.eq("username", username)).first();
+        
         if (doc == null) {
             return false;
         }
@@ -36,11 +37,10 @@ public class Auth {
     public static String[] getUserInfo(String username) {
         
         Document doc = users.find(Filters.eq("username", username)).first();
-        String[] data = new String[4];
+        String[] data = new String[3];
         data[0] = doc.getString("username");
-        data[1] = doc.getString("password");
-        data[2] = doc.getString("fullname");
-        data[3] = doc.getString("email");
+        data[1] = doc.getString("fullname");
+        data[2] = doc.getString("email");
         return data;
     }
 

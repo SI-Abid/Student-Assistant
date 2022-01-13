@@ -4,7 +4,8 @@ import javax.swing.*;
 
 import utils.Home;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
 
 public class LoginPanel {
 
@@ -76,21 +77,22 @@ public class LoginPanel {
     }
 
     public void login() {
-        if(username.getText().equals("") || String.copyValueOf(password.getPassword()).equals("")) {
-            JOptionPane.showMessageDialog(null, "Please fill in all the fields", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (username.getText().equals("") || String.copyValueOf(password.getPassword()).equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill in all the fields", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         User user = new User();
         user.login(username.getText(), String.copyValueOf(password.getPassword()));
-        
-        if(user.isVerified()) {
+
+        if (user.isVerified()) {
             JOptionPane.showMessageDialog(null, "Login Successful");
-                panel.setVisible(false);
-                new ClockPanel();
-                Home.addPanel(ClockPanel.getPanel());
-                Home.addPanel(user.getPanel());
-        //     panel.setVisible(false);
+            panel.setVisible(false);
+            new ClockPanel();
+            Home.addPanel(ClockPanel.getPanel());
+            Home.addPanel(user.getPanel());
+            // panel.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");
         }
