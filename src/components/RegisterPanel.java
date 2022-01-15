@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicPanelUI;
 
 import utils.Home;
 
@@ -28,17 +29,19 @@ public class RegisterPanel implements Panel {
     int GAP = 10;
     int labelWidth = 100;
     int startX = 70;
-    int startY = 60;
+    int startY = 40;
 
     public RegisterPanel() {
         init();
     }
 
     public void init() {
+
         panel = new JPanel();
         panel.setSize(width, height);
         panel.setLayout(null);
         panel.setBackground(new Color(255, 255, 255, 20));
+        panel.setUI(new BasicPanelUI());
 
         fullnameLabel = new JLabel("Fullname");
         fullnameLabel.setBounds(startX, startY, 100, 20);
@@ -104,13 +107,13 @@ public class RegisterPanel implements Panel {
         panel.add(confirmPassword);
 
         register = new JButton("Register");
-        register.setBounds(170, 220, 100, 25);
+        register.setBounds(startX+100, confirmPasswordLabel.getY()+35, 100, 25);
         register.setForeground(Color.BLACK);
         register.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(register);
 
         JLabel loginLink = new JLabel("Already have an account? Login");
-        loginLink.setBounds(100, register.getY() + 30, 250, 20);
+        loginLink.setBounds(100, register.getY() + 35, 250, 20);
         loginLink.setForeground(Color.LIGHT_GRAY);
         panel.add(loginLink);
 

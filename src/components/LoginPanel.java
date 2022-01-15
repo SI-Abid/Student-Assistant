@@ -1,6 +1,7 @@
 package components;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicPanelUI;
 
 import utils.Home;
 
@@ -31,14 +32,16 @@ public class LoginPanel implements Panel {
         panel.setSize(width, height);
         panel.setLayout(null);
         panel.setBackground(new Color(255, 255, 255, 20));
+        panel.setUI(new BasicPanelUI());
 
         usernameLabel = new JLabel("Username");
-        usernameLabel.setBounds(60, 80, 100, 20);
-        usernameLabel.setForeground(Color.LIGHT_GRAY);
+        usernameLabel.setBounds(60, 60, 100, 20);
+        usernameLabel.setForeground(Color.WHITE);
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(usernameLabel);
 
         username = new JTextField(15);
-        username.setBounds(150, 80, 200, 20);
+        username.setBounds(150, 60, 200, 20);
         username.setFont(new Font("Arial", Font.PLAIN, 14));
         username.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         username.setBackground(Color.LIGHT_GRAY);
@@ -46,25 +49,28 @@ public class LoginPanel implements Panel {
         panel.add(username);
 
         passwordLabel = new JLabel("Password");
-        passwordLabel.setBounds(60, 110, 100, 20);
-        passwordLabel.setForeground(Color.LIGHT_GRAY);
+        passwordLabel.setBounds(60, 90, 100, 20);
+        passwordLabel.setForeground(Color.WHITE);
+        passwordLabel.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(passwordLabel);
 
         password = new JPasswordField(20);
-        password.setBounds(150, 110, 200, 20);
+        password.setBounds(150, 90, 200, 20);
         password.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         password.setBackground(Color.LIGHT_GRAY);
         password.setForeground(Color.BLACK);
         panel.add(password);
 
-        login = new JButton("Login");
-        login.setBounds(160, 150, 100, 25);
+        login = new JButton("Sign In");
+        login.setBounds(110, 130, 200, 25);
         login.setFont(new Font("Arial", Font.BOLD, 15));
+        login.setBackground(new Color(10, 150, 15));
+        login.setForeground(Color.WHITE);
         panel.add(login);
 
         JLabel registerLink = new JLabel("Don't have an account?");
-        registerLink.setBounds(120, 190, 200, 20);
-        registerLink.setForeground(Color.LIGHT_GRAY);
+        registerLink.setBounds(125, 170, 200, 20);
+        registerLink.setForeground(Color.WHITE);
         panel.add(registerLink);
 
         login.addActionListener(l -> login());
@@ -92,7 +98,7 @@ public class LoginPanel implements Panel {
             }
             @Override
             public void mouseExited(MouseEvent evt) {
-                registerLink.setForeground(Color.LIGHT_GRAY);
+                registerLink.setForeground(Color.WHITE);
                 registerLink.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
         });

@@ -50,7 +50,7 @@ public class Home {
         
         layeredPane.add(panel);
         layeredPane.moveToFront(panel);
-        panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2 - 30, panel.getWidth(), panel.getHeight());
+        panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2, panel.getWidth(), panel.getHeight());
         panel.setOpaque(false);
     }
 
