@@ -5,13 +5,13 @@ import java.awt.Image;
 import javax.swing.*;
 
 import components.LoginPanel;
-import components.RegisterPanel;
+// import components.RegisterPanel;
 
 public class Home {
 
     private static JFrame frame;
     private static JLayeredPane layeredPane;
-    private static int width = 700;
+    private static int width = 800;
     private static int height = 600;
 
     public Home() {
@@ -50,9 +50,12 @@ public class Home {
         
         layeredPane.add(panel);
         layeredPane.moveToFront(panel);
-        panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2 - 30, panel.getWidth(),
-                panel.getHeight());
+        panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2 - 30, panel.getWidth(), panel.getHeight());
         panel.setOpaque(false);
+    }
+
+    public static void removePanel(JPanel panel) {
+        layeredPane.remove(panel);
     }
 
 }

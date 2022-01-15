@@ -23,7 +23,7 @@ class CA extends JFrame {
         setSize(400, 420);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        c = getContentPane();
+        c = getContentPane();   // EXPLAIN THIS
         c.setLayout(null);
  
         title = new JLabel("Create Account");

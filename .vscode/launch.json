@@ -5,6 +5,13 @@
             "name": "Launch CreateAccount",
             "request": "launch",
             "mainClass": "CreateAccount",
+            "projectName": "Student-Assistant_b54c10ac"
+        },
+        {
+            "type": "java",
+            "name": "Launch CreateAccount",
+            "request": "launch",
+            "mainClass": "CreateAccount",
             "projectName": "Student-Assistant_9e4ff290"
         },
         {

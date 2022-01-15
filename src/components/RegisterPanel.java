@@ -2,12 +2,14 @@ package components;
 
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.*;
 
 import javax.swing.*;
 
 import utils.Home;
 
-public class RegisterPanel {
+public class RegisterPanel implements Panel {
 
     JPanel panel;
     JTextField fullname;
@@ -29,6 +31,10 @@ public class RegisterPanel {
     int startY = 60;
 
     public RegisterPanel() {
+        init();
+    }
+
+    public void init() {
         panel = new JPanel();
         panel.setSize(width, height);
         panel.setLayout(null);
@@ -100,28 +106,50 @@ public class RegisterPanel {
         register = new JButton("Register");
         register.setBounds(170, 220, 100, 25);
         register.setForeground(Color.BLACK);
-        register.setFont(new Font("Arial", Font.PLAIN, 15));
+        register.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(register);
 
-        JButton loginLink = new JButton("Already have an account?");
-        loginLink.setBounds(startX + 45, register.getY() + 30, 220, 20);
-        loginLink.setBackground(Color.LIGHT_GRAY);
-        loginLink.setForeground(Color.BLACK);
-        loginLink.setFont(new Font("Arial", Font.PLAIN, 14));
+        JLabel loginLink = new JLabel("Already have an account? Login");
+        loginLink.setBounds(100, register.getY() + 30, 250, 20);
+        loginLink.setForeground(Color.LIGHT_GRAY);
         panel.add(loginLink);
 
         register.addActionListener(l -> register());
+        register.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                register.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            public void mouseExited(MouseEvent e) {
+                register.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        });
 
-        loginLink.addActionListener(l -> getLoginPanel());
-    }
+        loginLink.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                getLinkedPanel(LOGIN);
+            }
+            public void mouseEntered(MouseEvent evt) {
+                loginLink.setForeground(Color.CYAN);
+                loginLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            public void mouseExited(MouseEvent evt) {
+                loginLink.setForeground(Color.LIGHT_GRAY);
+                loginLink.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        });
 
-    public void getLoginPanel() {
-        panel.setVisible(false);
-        Home.addPanel(new LoginPanel().getPanel());
     }
 
     public JPanel getPanel() {
         return panel;
+    }
+    
+    public void getLinkedPanel(int type) {
+        Home.removePanel(panel);
+        if (type == LOGIN) {
+            panel = new LoginPanel().getPanel();
+        }
+        Home.addPanel(panel);
     }
 
     public void register() {
