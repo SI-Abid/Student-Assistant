@@ -45,19 +45,19 @@ public class ProfilePanel implements Panel{
         fullnameLabel = new JLabel(fullname);
         fullnameLabel.setBounds(60, 90, 200, 20);
         fullnameLabel.setForeground(Color.WHITE);
-        fullnameLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        fullnameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(fullnameLabel);
         
         emailLabel = new JLabel(email);
         emailLabel.setBounds(60, 120, 200, 20);
         emailLabel.setForeground(Color.WHITE);
-        emailLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        emailLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         panel.add(emailLabel);
         
         logout = new JButton("Logout");
         logout.setBounds(60, 150, 100, 20);
         logout.setForeground(Color.BLACK);
-        logout.setFont(new Font("Arial", Font.BOLD, 15));
+        logout.setFont(new Font("Arial", Font.PLAIN, 15));
         panel.add(logout);
 
         logout.addActionListener(l -> getLinkedPanel(Type.LOGIN));
@@ -71,11 +71,10 @@ public class ProfilePanel implements Panel{
 
     @Override
     public void getLinkedPanel(Type type) {
-        Home.removePanel(panel);
+        Home.removeAllPanels();
         if(type == Type.LOGIN) {
             Home.addPanel(new LoginPanel().getPanel());
         }
-        Home.addPanel(panel);
     }
     
 }

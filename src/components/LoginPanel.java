@@ -6,6 +6,8 @@ import javax.swing.plaf.basic.BasicPanelUI;
 import utils.Home;
 
 import java.awt.Font;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.*;
@@ -26,12 +28,12 @@ public class LoginPanel implements Panel {
         init();
     }
 
-    public void init() {
+    private void init() {
 
         panel = new JPanel();
         panel.setSize(width, height);
         panel.setLayout(null);
-        panel.setBackground(new Color(255, 255, 255, 20));
+        panel.setBackground(new Color(255, 255, 255));
         panel.setUI(new BasicPanelUI());
 
         usernameLabel = new JLabel("Username");
@@ -44,6 +46,7 @@ public class LoginPanel implements Panel {
         username.setBounds(150, 60, 200, 20);
         username.setFont(new Font("Arial", Font.PLAIN, 14));
         username.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        username.setMargin(new Insets(0, 10, 0, 10));
         username.setBackground(Color.LIGHT_GRAY);
         username.setForeground(Color.BLACK);
         panel.add(username);
@@ -62,7 +65,7 @@ public class LoginPanel implements Panel {
         panel.add(password);
 
         login = new JButton("Sign In");
-        login.setBounds(110, 130, 200, 25);
+        login.setBounds(150, 130, 120, 25);
         login.setFont(new Font("Arial", Font.BOLD, 15));
         login.setBackground(new Color(10, 150, 15));
         login.setForeground(Color.WHITE);
@@ -89,7 +92,7 @@ public class LoginPanel implements Panel {
         registerLink.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                getLinkedPanel(REGISTER);
+                getLinkedPanel(Type.REGISTER);
             }
             @Override
             public void mouseEntered(MouseEvent evt) {
@@ -109,9 +112,9 @@ public class LoginPanel implements Panel {
         return panel;
     }
 
-    public void getLinkedPanel(int type) {
+    public void getLinkedPanel(Type type) {
         Home.removePanel(panel);
-        if (type == REGISTER) {
+        if (type == Type.REGISTER) {
             panel = new RegisterPanel().getPanel();
         }
         Home.addPanel(panel);
@@ -129,10 +132,11 @@ public class LoginPanel implements Panel {
 
         if (user.isVerified()) {
             JOptionPane.showMessageDialog(null, "Login Successful");
-            panel.setVisible(false);
+            Home.removePanel(panel);
             new ClockPanel();
             Home.addPanel(ClockPanel.getPanel());
-            Home.addPanel(user.getPanel());
+            JPanel profile = user.getPanel();
+            Home.addPanel(profile, new Rectangle(Home.getWidth() - profile.getWidth(), 0, profile.getWidth(), profile.getHeight()));
             // panel.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");

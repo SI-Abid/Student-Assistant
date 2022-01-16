@@ -1,7 +1,5 @@
 package components;
 
-import java.awt.Color;
-
 import javax.swing.*;
 
 import utils.Auth;
@@ -40,22 +38,8 @@ public class User {
     }
 
     public JPanel getPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-        panel.setSize(200, 100);
-        panel.setBounds(0, 0, 200, 200);
 
-        JLabel label = new JLabel("Welcome " + this.FullName);
-        label.setForeground(Color.WHITE);
-        label.setBounds(0, 15, 200, 20);
-        panel.add(label);
-
-        JLabel label2 = new JLabel("Username: " + this.Username);
-        label2.setForeground(Color.WHITE);
-        label2.setBounds(0, 40, 200, 20);
-        panel.add(label2);
-
-        return panel;
+        return new ProfilePanel(Username, FullName, Email).getPanel();
     }
 
 }

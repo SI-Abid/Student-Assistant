@@ -34,7 +34,7 @@ class CA extends JFrame {
         c.add(title);
  
         lfname = new JLabel("Full Name :");
-        lfname.setBounds(30, 80, 80, 20);
+        lfname.setBounds(30, 80, 100, 20);
         c.add(lfname);
 
         tfname = new JTextField();
@@ -42,7 +42,7 @@ class CA extends JFrame {
         c.add(tfname);
 
         luname = new JLabel("Username :");
-        luname.setBounds(30, 120, 80, 20);
+        luname.setBounds(30, 120, 100, 20);
         c.add(luname);
 
         tuname = new JTextField();
@@ -50,7 +50,7 @@ class CA extends JFrame {
         c.add(tuname);
 
         lemail = new JLabel("Email :");
-        lemail.setBounds(30, 160, 80, 20);
+        lemail.setBounds(30, 160, 100, 20);
         c.add(lemail);
 
         temail = new JTextField();
@@ -58,7 +58,7 @@ class CA extends JFrame {
         c.add(temail);
 
         lpass = new JLabel("Password :");
-        lpass.setBounds(30, 200, 80, 20);
+        lpass.setBounds(30, 200, 100, 20);
         c.add(lpass);
 
         tpass = new JTextField();
@@ -66,7 +66,7 @@ class CA extends JFrame {
         c.add(tpass);
 
         lcpass = new JLabel("Confirm Password :");
-        lcpass.setBounds(30, 240, 130, 20);
+        lcpass.setBounds(30, 240, 150, 20);
         c.add(lcpass);
 
         tcpass = new JTextField();
