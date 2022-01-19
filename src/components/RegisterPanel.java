@@ -122,6 +122,7 @@ public class RegisterPanel implements Panel {
         panel.add(loginLink);
 
         register.addActionListener(l -> register());
+
         register.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 register.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -168,11 +169,11 @@ public class RegisterPanel implements Panel {
         if (fullname.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("")) {
             JOptionPane.showMessageDialog(null, "Please fill all the fields");
         } else if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(null, "Password and Confirm Password do not match");
+            JOptionPane.showMessageDialog(null, "Passwords do not match");
         } else {
             if (new User().register(fullname, username, password, email)) {
                 JOptionPane.showMessageDialog(null, "Registration Successful");
-                panel.setVisible(false);
+                getLinkedPanel(Type.LOGIN);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Registration Failed");
