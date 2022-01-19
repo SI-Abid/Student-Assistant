@@ -2,11 +2,10 @@ package components;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.FlowLayout;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicPanelUI;
+import javax.swing.*;
 
 import utils.Home;
 
@@ -16,6 +15,7 @@ public class ProfilePanel implements Panel{
     JLabel usernameLabel;
     JLabel fullnameLabel;
     JLabel emailLabel;
+    JLabel userImage;
     JButton logout;
     String username;
     String fullname;
@@ -31,33 +31,42 @@ public class ProfilePanel implements Panel{
     private void init() {
         
         panel = new JPanel();
-        panel.setSize(250, 250);
+        panel.setSize(200, 200);
         panel.setLayout(null);
-        panel.setBackground(new Color(255, 255, 255));
-        panel.setUI(new BasicPanelUI());
+        panel.setBackground(Color.WHITE);
         
+        // add user image
+        userImage = new JLabel();
+        userImage.setBounds(50, 20, 100, 100);
+        ImageIcon imageIcon = new ImageIcon(Home.class.getResource("/images/user.png"));
+        Image img = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        userImage.setIcon(new ImageIcon(img));
+        panel.add(userImage);
+
+        // add username
         usernameLabel = new JLabel(username);
-        usernameLabel.setBounds(60, 60, 100, 20);
+        usernameLabel.setBounds(10, 120, 180, 20);
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        // align text to the middle
+        usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         usernameLabel.setForeground(Color.WHITE);
-        usernameLabel.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(usernameLabel);
-        
+
+        // add fullname
         fullnameLabel = new JLabel(fullname);
-        fullnameLabel.setBounds(60, 90, 200, 20);
+        fullnameLabel.setBounds(10, 150, 180, 20);
+        fullnameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        fullnameLabel.setHorizontalAlignment(JLabel.CENTER);
         fullnameLabel.setForeground(Color.WHITE);
-        fullnameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(fullnameLabel);
-        
-        emailLabel = new JLabel(email);
-        emailLabel.setBounds(60, 120, 200, 20);
-        emailLabel.setForeground(Color.WHITE);
-        emailLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        panel.add(emailLabel);
-        
-        logout = new JButton("Logout");
-        logout.setBounds(60, 150, 100, 20);
+
+        // add logout button
+        logout = new JButton("LOGOUT");
+        logout.setBounds(60, 180, 80, 20);
+        logout.setFont(new Font("Arial", Font.BOLD, 12));
+        logout.setBackground(Color.YELLOW);
         logout.setForeground(Color.BLACK);
-        logout.setFont(new Font("Arial", Font.PLAIN, 15));
+        logout.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(logout);
 
         logout.addActionListener(l -> getLinkedPanel(Type.LOGIN));

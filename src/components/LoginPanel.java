@@ -131,13 +131,13 @@ public class LoginPanel implements Panel {
         user.login(username.getText(), String.copyValueOf(password.getPassword()));
 
         if (user.isVerified()) {
-            JOptionPane.showMessageDialog(null, "Login Successful");
+            // JOptionPane.showMessageDialog(null, "Login Successful");
             Home.removePanel(panel);
             new ClockPanel();
             Home.addPanel(ClockPanel.getPanel());
             JPanel profile = user.getPanel();
-            Home.addPanel(profile, new Rectangle(Home.getWidth() - profile.getWidth(), 0, profile.getWidth(), profile.getHeight()));
-            // panel.setVisible(false);
+            Home.addPanel(profile, new Rectangle(Home.getWidth() - profile.getWidth()+20, 0, profile.getWidth(), profile.getHeight()));
+            
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");
         }

@@ -1,13 +1,12 @@
 package utils;
 
-import java.awt.Component;
 import java.awt.Image;
-
-import javax.swing.*;
+import java.awt.Component;
 import java.awt.Rectangle;
 
+import javax.swing.*;
+
 import components.LoginPanel;
-// import components.RegisterPanel;
 
 public class Home {
 
@@ -42,12 +41,12 @@ public class Home {
 
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, width, height);
+        
+        layeredPane.add(bgPanel, JLayeredPane.FRAME_CONTENT_LAYER);
+        
         frame.add(layeredPane);
-
-
+        
         addPanel(new LoginPanel().getPanel());
-
-        layeredPane.add(bgPanel);
 
         frame.setVisible(true);
     }
@@ -57,7 +56,7 @@ public class Home {
      */
     public static void addPanel(JPanel panel) {
         
-        layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2, panel.getWidth(), panel.getHeight());
         panel.setOpaque(false);
@@ -68,7 +67,7 @@ public class Home {
      * @param bounds
      */
     public static void addPanel(JPanel panel, Rectangle bounds) {
-        layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(bounds);
         panel.setOpaque(false);
@@ -88,13 +87,17 @@ public class Home {
     public static int getHeight() {
         return height;
     }
+    /**
+     * remove all panels from default layer
+     */
     public static void removeAllPanels() {
-        Component[] c = layeredPane.getComponentsInLayer(100);
+        Component[] c = layeredPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
         for (Component component : c) {
-            if(component instanceof JPanel) {
-                component.setVisible(false);
-                layeredPane.remove(component);
-            }
+            component.setVisible(false);
+            layeredPane.remove(component);
         }
+    }
+    public void addMenu() {
+
     }
 }
