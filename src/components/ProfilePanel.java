@@ -37,7 +37,7 @@ public class ProfilePanel implements Panel{
         // add user image
         userImage = new JLabel();
         userImage.setBounds(50, 20, 100, 100);
-        ImageIcon imageIcon = new ImageIcon(Home.class.getResource("/images/user.png"));
+        ImageIcon imageIcon = new ImageIcon("src/images/user.png");
         Image img = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImage.setIcon(new ImageIcon(img));
         panel.add(userImage);

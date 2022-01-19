@@ -1,3 +1,4 @@
+import utils.Auth;
 import utils.Home;
 
 
@@ -7,6 +8,7 @@ import javax.swing.JOptionPane;
 public class Test {
    public static void main(String[] args) throws Exception {
 
+        Auth.init();
         new Home();
         System.out.println("Hello World!");
     }

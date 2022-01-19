@@ -16,7 +16,7 @@ public class Auth {
     private static MongoDatabase database;
     private static MongoCollection<Document> users;
 
-    static { 
+    public static void init() { 
         Dotenv env = Dotenv.load();
         String connString = env.get("CONNECTION_STRING");
         String db = env.get("DATABASE");
