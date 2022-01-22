@@ -10,7 +10,6 @@ public class User {
     String Username;
     String Email;
     boolean isLoggedIn=false;
-    JPanel userPanel;
     
     public void login(String username, String password) {
 
@@ -21,6 +20,7 @@ public class User {
             this.Username = data[0];
             this.FullName = data[1];
             this.Email = data[2];
+            Auth.updateLogin(username);
         }
     }
 
@@ -38,8 +38,7 @@ public class User {
     }
 
     public JPanel getPanel() {
-
-        return new ProfilePanel(Username, FullName, Email).getPanel();
+        return new ProfilePanel(this).getPanel();
     }
-
+    
 }

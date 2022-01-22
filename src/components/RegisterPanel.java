@@ -2,14 +2,15 @@ package components;
 
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicPanelUI;
 
+import utils.Auth;
 import utils.Home;
+import utils.Color;
 
 public class RegisterPanel implements Panel {
 
@@ -41,7 +42,7 @@ public class RegisterPanel implements Panel {
         panel = new JPanel();
         panel.setSize(width, height);
         panel.setLayout(null);
-        panel.setBackground(new Color(255, 255, 255));
+        panel.setBackground(Color.LIGHT_PURPLE);
         panel.setUI(new BasicPanelUI());
 
         fullnameLabel = new JLabel("Fullname");
@@ -111,9 +112,10 @@ public class RegisterPanel implements Panel {
 
         register = new JButton("Register");
         register.setBounds(startX+ labelWidth + GAP, confirmPasswordLabel.getY()+35, 100, 25);
-        register.setBackground(new Color(20, 110, 200));
+        register.setBackground(Color.LIGHT_BLUE);
         register.setForeground(Color.WHITE);
         register.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        register.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(register);
 
         JLabel loginLink = new JLabel("Already have an account? Login");
@@ -171,6 +173,7 @@ public class RegisterPanel implements Panel {
         } else if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(null, "Passwords do not match");
         } else {
+            Auth.init();
             if (new User().register(fullname, username, password, email)) {
                 JOptionPane.showMessageDialog(null, "Registration Successful");
                 getLinkedPanel(Type.LOGIN);

@@ -1,12 +1,12 @@
 package components;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.*;
 
 import utils.Home;
+import utils.Color;
 
 public class ProfilePanel implements Panel{
 
@@ -16,14 +16,10 @@ public class ProfilePanel implements Panel{
     JLabel emailLabel;
     JLabel userImage;
     JButton logout;
-    String username;
-    String fullname;
-    String email;
+    User user;
     
-    public ProfilePanel(String username, String fullname, String email) {
-        this.username = username;
-        this.fullname = fullname;
-        this.email = email;
+    public ProfilePanel(User user) {
+        this.user = user;
         init();
     }
 
@@ -32,7 +28,7 @@ public class ProfilePanel implements Panel{
         panel = new JPanel();
         panel.setSize(200, 200);
         panel.setLayout(null);
-        panel.setBackground(Color.WHITE);
+        panel.setBackground(Color.LIGHT_PURPLE);
         
         // add user image
         userImage = new JLabel();
@@ -43,16 +39,15 @@ public class ProfilePanel implements Panel{
         panel.add(userImage);
 
         // add username
-        usernameLabel = new JLabel(username);
+        usernameLabel = new JLabel(user.Username);
         usernameLabel.setBounds(10, 120, 180, 20);
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        // align text to the middle
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         usernameLabel.setForeground(Color.WHITE);
         panel.add(usernameLabel);
 
         // add fullname
-        fullnameLabel = new JLabel(fullname);
+        fullnameLabel = new JLabel(user.FullName);
         fullnameLabel.setBounds(10, 150, 180, 20);
         fullnameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         fullnameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -81,6 +76,7 @@ public class ProfilePanel implements Panel{
     public void getLinkedPanel(Type type) {
         Home.removeAllPanels();
         if(type == Type.LOGIN) {
+            user=null;
             Home.addPanel(new LoginPanel().getPanel());
         }
     }

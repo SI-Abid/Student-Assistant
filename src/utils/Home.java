@@ -59,7 +59,7 @@ public class Home {
         layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2, panel.getWidth(), panel.getHeight());
-        panel.setOpaque(false);
+        panel.setOpaque(true);
     }
     /**
      * Add panel according to the position
@@ -70,7 +70,7 @@ public class Home {
         layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(bounds);
-        panel.setOpaque(false);
+        panel.setOpaque(true);
     }
     /**
      * Remove panel from the frame

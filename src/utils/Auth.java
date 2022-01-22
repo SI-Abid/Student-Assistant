@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Date;
+
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -28,10 +30,10 @@ public class Auth {
     public static boolean passwordAuth(String username, String password) {
         Document doc = users.find(Filters.eq("username", username)).first();
         
-        if (doc == null) {
-            return false;
+        if (doc.get("password").equals(password)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static String[] getUserInfo(String username) {
@@ -68,6 +70,18 @@ public class Auth {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static void updateLogin(String username) {
+        users = database.getCollection("login_history");
+        Document doc = users.find(Filters.eq("username", username)).first();
+        if (doc == null) {
+            doc = new Document("username", username)
+                    .append("last_login", new Date().toString());
+            users.insertOne(doc);
+        } else {
+            users.updateOne(Filters.eq("username", username), new Document("$set", new Document("last_login", new Date().toString())));
         }
     }
 

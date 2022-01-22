@@ -3,12 +3,14 @@ package components;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicPanelUI;
 
+import utils.Auth;
 import utils.Home;
+import utils.Color;
 
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.*;
 
@@ -33,7 +35,7 @@ public class LoginPanel implements Panel {
         panel = new JPanel();
         panel.setSize(width, height);
         panel.setLayout(null);
-        panel.setBackground(new Color(255, 255, 255));
+        panel.setBackground(Color.LIGHT_PURPLE);
         panel.setUI(new BasicPanelUI());
 
         usernameLabel = new JLabel("Username");
@@ -67,8 +69,9 @@ public class LoginPanel implements Panel {
         login = new JButton("Sign In");
         login.setBounds(150, 130, 120, 25);
         login.setFont(new Font("Arial", Font.BOLD, 15));
-        login.setBackground(new Color(10, 150, 15));
+        login.setBackground(Color.LIGHT_GREEN);
         login.setForeground(Color.WHITE);
+        login.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(login);
 
         JLabel registerLink = new JLabel("Don't have an account?");
@@ -81,11 +84,13 @@ public class LoginPanel implements Panel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 login.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                login.setBackground(Color.GREEN);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 login.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                login.setBackground(Color.LIGHT_GREEN);
             }
         });
 
@@ -127,16 +132,17 @@ public class LoginPanel implements Panel {
             return;
         }
 
+        Auth.init();
         User user = new User();
         user.login(username.getText(), String.copyValueOf(password.getPassword()));
 
         if (user.isVerified()) {
-            // JOptionPane.showMessageDialog(null, "Login Successful");
+            
             Home.removePanel(panel);
             new ClockPanel();
-            Home.addPanel(ClockPanel.getPanel());
+            // Home.addPanel(ClockPanel.getPanel());
             JPanel profile = user.getPanel();
-            Home.addPanel(profile, new Rectangle(Home.getWidth() - profile.getWidth()+20, 0, profile.getWidth(), profile.getHeight()));
+            Home.addPanel(profile, new Rectangle(Home.getWidth() - profile.getWidth(), 0, profile.getWidth(), profile.getHeight()));
             
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");

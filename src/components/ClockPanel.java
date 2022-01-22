@@ -17,7 +17,7 @@ public class ClockPanel {
         clock = new JLabel();
         panel.setSize(width, height);
         panel.setLayout(null);
-        // panel.setBackground(new Color(255, 255, 255, 20));
+        panel.setBackground(new Color(170, 150, 230));
 
         // round panel corners
         clock.setBounds(width / 2 - 100, height / 2 - 50, 200, 100);
