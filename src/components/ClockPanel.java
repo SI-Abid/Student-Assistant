@@ -1,28 +1,33 @@
 package components;
 
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.*;
 
-public class ClockPanel {
+public class ClockPanel implements Panel {
 
-    static JLabel clock;
-    static JPanel panel;
-    int width = 400;
-    int height = 250;
+    JLabel clock;
+    JPanel panel;
+    int width = 160;
+    int height = 50;
 
     public ClockPanel() {
+        init();
+    }
+    
+    public void init() {
 
         panel = new JPanel();
         clock = new JLabel();
         panel.setSize(width, height);
         panel.setLayout(null);
-        panel.setBackground(new Color(170, 150, 230));
+        panel.setBackground(Color.MAGENTA);
 
-        // round panel corners
-        clock.setBounds(width / 2 - 100, height / 2 - 50, 200, 100);
-        clock.setFont(new Font("Arial", Font.PLAIN, 30));
+        clock.setBounds(0, 0, width, height);
+        clock.setFont(new Font("Arial", Font.PLAIN, 27));
         clock.setForeground(Color.WHITE);
+        clock.setHorizontalAlignment(JLabel.CENTER);
+        clock.setVerticalAlignment(JLabel.CENTER);
         panel.add(clock);
         // panel.setOpaque(false);
 
@@ -30,14 +35,12 @@ public class ClockPanel {
 
     }
 
-    public static JPanel getPanel() {
+    public JPanel getPanel() {
         return panel;
     }
 
-    public void setTime(String time) {
-        // panel = new JPanel();
-        clock = new JLabel(time);
-        // clock.setText(time);
+    public void getLinkedPanel(Type type) {
+        // TODO Auto-generated method stub
+        
     }
-
 }

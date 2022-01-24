@@ -37,7 +37,7 @@ public class RegisterPanel implements Panel {
         init();
     }
 
-    private void init() {
+    public void init() {
 
         panel = new JPanel();
         panel.setSize(width, height);
@@ -156,8 +156,12 @@ public class RegisterPanel implements Panel {
     
     public void getLinkedPanel(Type type) {
         Home.removePanel(panel);
-        if (type == Type.LOGIN) {
-            panel = new LoginPanel().getPanel();
+        switch (type) {
+            case LOGIN:
+                panel = new LoginPanel().getPanel();
+                break;
+            default:
+                break;
         }
         Home.addPanel(panel);
     }

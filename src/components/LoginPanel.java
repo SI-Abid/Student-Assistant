@@ -30,7 +30,7 @@ public class LoginPanel implements Panel {
         init();
     }
 
-    private void init() {
+    public void init() {
 
         panel = new JPanel();
         panel.setSize(width, height);
@@ -80,6 +80,7 @@ public class LoginPanel implements Panel {
         panel.add(registerLink);
 
         login.addActionListener(l -> login());
+        
         login.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -119,8 +120,12 @@ public class LoginPanel implements Panel {
 
     public void getLinkedPanel(Type type) {
         Home.removePanel(panel);
-        if (type == Type.REGISTER) {
-            panel = new RegisterPanel().getPanel();
+        switch (type) {
+            case REGISTER:
+                panel = new RegisterPanel().getPanel();
+                break;
+            default:
+                break;
         }
         Home.addPanel(panel);
     }
@@ -139,11 +144,18 @@ public class LoginPanel implements Panel {
         if (user.isVerified()) {
             
             Home.removePanel(panel);
-            new ClockPanel();
-            // Home.addPanel(ClockPanel.getPanel());
+            
             JPanel profile = user.getPanel();
             Home.addPanel(profile, new Rectangle(Home.getWidth() - profile.getWidth(), 0, profile.getWidth(), profile.getHeight()));
             
+            JPanel clock = new ClockPanel().getPanel();
+            Home.addPanel(clock, new Rectangle(Home.getWidth() - profile.getWidth(), profile.getHeight(), clock.getWidth(), clock.getHeight()));
+            
+            
+
+            JPanel dashboard = new DashBoard().getPanel();
+            Home.addPanel(dashboard, new Rectangle(Home.getWidth()-dashboard.getWidth(), profile.getHeight()+clock.getHeight(), dashboard.getWidth(), dashboard.getHeight()));
+        
         } else {
             JOptionPane.showMessageDialog(null, "Login Failed");
         }

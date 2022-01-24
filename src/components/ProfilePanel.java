@@ -8,7 +8,7 @@ import javax.swing.*;
 import utils.Home;
 import utils.Color;
 
-public class ProfilePanel implements Panel{
+public class ProfilePanel implements Panel {
 
     JPanel panel;
     JLabel usernameLabel;
@@ -17,22 +17,24 @@ public class ProfilePanel implements Panel{
     JLabel userImage;
     JButton logout;
     User user;
+    int width = 160;
+    int height = 220;
     
     public ProfilePanel(User user) {
         this.user = user;
         init();
     }
 
-    private void init() {
+    public void init() {
         
         panel = new JPanel();
-        panel.setSize(200, 200);
+        panel.setSize(width, height);
         panel.setLayout(null);
         panel.setBackground(Color.LIGHT_PURPLE);
         
         // add user image
         userImage = new JLabel();
-        userImage.setBounds(50, 20, 100, 100);
+        userImage.setBounds(30, 20, 100, 100);
         ImageIcon imageIcon = new ImageIcon("src/images/user.png");
         Image img = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImage.setIcon(new ImageIcon(img));
@@ -40,7 +42,7 @@ public class ProfilePanel implements Panel{
 
         // add username
         usernameLabel = new JLabel(user.Username);
-        usernameLabel.setBounds(10, 120, 180, 20);
+        usernameLabel.setBounds(10, 120, 140, 20);
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         usernameLabel.setForeground(Color.WHITE);
@@ -48,7 +50,7 @@ public class ProfilePanel implements Panel{
 
         // add fullname
         fullnameLabel = new JLabel(user.FullName);
-        fullnameLabel.setBounds(10, 150, 180, 20);
+        fullnameLabel.setBounds(10, 150, 140, 20);
         fullnameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         fullnameLabel.setHorizontalAlignment(JLabel.CENTER);
         fullnameLabel.setForeground(Color.WHITE);
@@ -56,7 +58,7 @@ public class ProfilePanel implements Panel{
 
         // add logout button
         logout = new JButton("LOGOUT");
-        logout.setBounds(60, 180, 80, 20);
+        logout.setBounds(40, 180, 80, 20);
         logout.setFont(new Font("Arial", Font.BOLD, 12));
         logout.setBackground(Color.YELLOW);
         logout.setForeground(Color.BLACK);

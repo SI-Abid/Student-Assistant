@@ -78,10 +78,10 @@ public class Auth {
         Document doc = users.find(Filters.eq("username", username)).first();
         if (doc == null) {
             doc = new Document("username", username)
-                    .append("last_login", new Date().toString());
+                    .append("last_login", new Date().getTime());
             users.insertOne(doc);
         } else {
-            users.updateOne(Filters.eq("username", username), new Document("$set", new Document("last_login", new Date().toString())));
+            users.updateOne(Filters.eq("username", username), new Document("$set", new Document("last_login", new Date().getTime())));
         }
     }
 

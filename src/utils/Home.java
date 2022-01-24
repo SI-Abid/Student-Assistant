@@ -97,7 +97,20 @@ public class Home {
             layeredPane.remove(component);
         }
     }
-    public void addMenu() {
 
+    public static void addContent(JPanel panel) {
+        layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.moveToFront(panel);
+        panel.setBounds(5, 5, panel.getWidth(), panel.getHeight());
+        panel.setOpaque(true);
     }
+
+    public static void removeContent() {
+        Component[] c = layeredPane.getComponentsInLayer(JLayeredPane.PALETTE_LAYER);
+        for (Component component : c) {
+            component.setVisible(false);
+            layeredPane.remove(component);
+        }
+    }
+
 }
