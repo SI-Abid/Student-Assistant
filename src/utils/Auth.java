@@ -105,10 +105,12 @@ public class Auth {
             }
             return assignments;
         }
-        return null;
+        ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+        assignments.add(new Assignment("Demo Assignment", "This is a demo assignment", "2020-01-01", false));
+        return assignments;
     }
 
-    public static void addAssignment(String username, String title, String dueDate, String description) {
+    public static void addAssignment(String username, Assignment as) {
         
         init();
         collection = database.getCollection("assignments");
@@ -119,9 +121,9 @@ public class Auth {
             collection.insertOne(doc);
         }
         ArrayList<Document> docs = (ArrayList<Document>) doc.get("assignment_list");
-        Document assignment = new Document("title", title)
-                .append("description", description)
-                .append("deadline", dueDate)
+        Document assignment = new Document("title", as.getTitle())
+                .append("description", as.getDescription())
+                .append("deadline", as.getDueDate())
                 .append("finished", false);
         docs.add(assignment);
         collection.updateOne(Filters.eq("username", username), new Document("$set", new Document("assignment_list", docs)));

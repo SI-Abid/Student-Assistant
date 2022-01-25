@@ -1,6 +1,7 @@
 package components;
 
 import java.awt.Font;
+import java.awt.Point;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -27,35 +28,18 @@ public class AssignmentPanel implements Panel {
         panel.setBounds(0, 0, width, height);
         GroupLayout layout = new GroupLayout(panel);
         panel.setLayout(layout);
-        // layout.setVerticalGroup(
-        //     layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-        //     .addGroup(group)
-        // );
-        ParallelGroup hGroup = layout.createParallelGroup(Alignment.TRAILING, false);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        ParallelGroup hGroup = layout.createParallelGroup(Alignment.LEADING);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
+            layout.createSequentialGroup()
             .addGroup(hGroup)
         );
+        
         SequentialGroup vGroup = layout.createSequentialGroup().addContainerGap();
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(vGroup)
-        );
-        // jPanel1.setLayout(layout);
-        // layout.setHorizontalGroup(
-        //     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        //     .addGroup(layout.createSequentialGroup()
-        //         .addContainerGap()
-        //         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        //             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        //             .addGroup(layout.createSequentialGroup()
-        //                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-        //                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        //                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        //                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        //                 .addGap(0, 0, Short.MAX_VALUE)))
-        //         .addContainerGap())
-        // );
+        layout.setVerticalGroup(vGroup);
+
         panel.setBackground(Color.LIGHT_BLUE);
         panel.setOpaque(false);
         panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
@@ -66,50 +50,21 @@ public class AssignmentPanel implements Panel {
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        // scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        // scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        // scrollPane.getVerticalScrollBar().setValue(0);
+        // scrollPane.repaint();
+        // scrollPane.revalidate();
         
         for(Assignment assignment : User.assignments) {
             
             if(assignment==null) {
                 continue;
             }
-            JPanel assignmentPanel = new JPanel();
-            assignmentPanel.setSize(width, 80);
-            GroupLayout assignmentLayout = new GroupLayout(assignmentPanel);
-            assignmentLayout.setHorizontalGroup(
-                assignmentLayout.createParallelGroup(Alignment.LEADING)
-                .addGap(0, 0, Short.MAX_VALUE)
-            );
-            assignmentLayout.setVerticalGroup(
-                assignmentLayout.createParallelGroup(Alignment.LEADING)
-                .addGap(0, 100, Short.MAX_VALUE)
-            );
-            assignmentPanel.setLayout(assignmentLayout);
+
+            loadAssignment(assignment, hGroup, vGroup);
             
-            assignmentPanel.setBackground(Color.LIGHT_BLUE);
-            // assignmentPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-            
-            JLabel title = new JLabel(assignment.getTitle());
-            title.setFont(new Font("Arial", Font.BOLD, 12));
-            title.setBounds(10, 10, width-20, 20);
-            title.setForeground(Color.BLACK);
-            assignmentPanel.add(title);
-            
-            JLabel dueDate = new JLabel(assignment.getDueDate());
-            dueDate.setFont(new Font("Arial", Font.PLAIN, 12));
-            dueDate.setBounds(10, 30, width-20, 20);
-            dueDate.setForeground(Color.BLACK);
-            assignmentPanel.add(dueDate);
-            
-            JLabel description = new JLabel(assignment.getDescription());
-            description.setFont(new Font("Arial", Font.PLAIN, 12));
-            description.setBounds(10, 50, width-20, 20);
-            description.setForeground(Color.BLACK);
-            assignmentPanel.add(description);
-            
-            vGroup.addComponent(assignmentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
-            hGroup.addComponent(assignmentPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         }
 
         this.panel = new JPanel();
@@ -163,7 +118,11 @@ public class AssignmentPanel implements Panel {
             frame.add(add);
 
             add.addActionListener(l2 -> {
-                User.addAssignment(title.getText(), dueDate.getText(), description.getText());
+                Assignment as = new Assignment(title.getText(), dueDate.getText(), description.getText(), false);
+                User.addAssignment(as);
+                loadAssignment(as, hGroup, vGroup);
+                frame.dispose();
+                
             });
         });
 
@@ -177,8 +136,51 @@ public class AssignmentPanel implements Panel {
 
     @Override
     public JPanel getPanel() {
-        // TODO Auto-generated method stub
+    
         return panel;
+    }
+
+    public static void loadAssignment(Assignment assignment,ParallelGroup hGroup, SequentialGroup vGroup) {
+        
+        JPanel assignmentPanel = new JPanel();
+        assignmentPanel.setSize(width, 60);
+        assignmentPanel.setLayout(null);
+        
+        assignmentPanel.setBackground(Color.LIGHT_BLUE);
+        assignmentPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        
+        JLabel title = new JLabel(assignment.getTitle());
+        title.setFont(new Font("Arial", Font.BOLD, 12));
+        title.setBounds(10, 10, width-20, 20);
+        title.setForeground(Color.BLACK);
+        assignmentPanel.add(title);
+        
+        JLabel dueDate = new JLabel(assignment.getDueDate());
+        dueDate.setFont(new Font("Arial", Font.PLAIN, 12));
+        dueDate.setBounds(10, 30, width-20, 20);
+        dueDate.setForeground(Color.BLACK);
+        assignmentPanel.add(dueDate);
+        
+        JTextArea description = new JTextArea(assignment.getDescription());
+        description.setFont(new Font("Arial", Font.PLAIN, 12));
+        description.setBounds(10, 50, width-150, 40);
+        description.setOpaque(false);
+        description.setEditable(false);
+        description.setLineWrap(true);
+        description.setWrapStyleWord(true);
+        description.setForeground(Color.BLACK);
+        assignmentPanel.add(description);
+
+        JLabel status = new JLabel(assignment.isCompleted() ? " Completed" : " Not Completed");
+        status.setFont(new Font("Arial", Font.BOLD, 12));
+        status.setBounds(width-170, 75, 120, 20);
+        status.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        status.setForeground(status.getText().equals(" Completed") ? Color.GREEN : Color.RED);
+        assignmentPanel.add(status);
+        
+        vGroup.addComponent(assignmentPanel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE);
+        hGroup.addComponent(assignmentPanel);
+
     }
     
 }

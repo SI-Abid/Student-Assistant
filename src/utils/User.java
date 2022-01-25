@@ -56,8 +56,9 @@ public class User {
         return Username;
     }
 
-    public static void addAssignment(String title, String dueDate, String description) {
-        Auth.addAssignment(Username, title, dueDate, description);
+    public static void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
+        Auth.addAssignment(Username, assignment);
     }
 
 }

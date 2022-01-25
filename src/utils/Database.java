@@ -221,16 +221,16 @@ public class Database {
 //         return null;
 //     }
 
-//     public boolean isRegistered(String email) {
-//         try {
-//             ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE email = '" + email + "'");
-//             if (rs.next()) {
-//                 rs.close();
-//                 return true;
-//             }
-//         } catch (Exception e) {
-//             System.out.println(e);
-//         }
-//         return false;
-//     }
+    // public boolean isRegistered(String email) {
+    //     try {
+    //         ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE email = '" + email + "'");
+    //         if (rs.next()) {
+    //             rs.close();
+    //             return true;
+    //         }
+    //     } catch (Exception e) {
+    //         System.out.println(e);
+    //     }
+    //     return false;
+    // }
 }
