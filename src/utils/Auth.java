@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.mongodb.client.MongoClient;
@@ -16,7 +17,7 @@ public class Auth {
 
     private static MongoClient client;
     private static MongoDatabase database;
-    private static MongoCollection<Document> users;
+    private static MongoCollection<Document> collection;
 
     public static void init() { 
         Dotenv env = Dotenv.load();
@@ -24,11 +25,13 @@ public class Auth {
         String db = env.get("DATABASE");
         client = MongoClients.create(connString);
         database = client.getDatabase(db);
-        users = database.getCollection("user_info");
+        collection = database.getCollection("user_info");
     }
 
     public static boolean passwordAuth(String username, String password) {
-        Document doc = users.find(Filters.eq("username", username)).first();
+
+        collection = database.getCollection("user_info");
+        Document doc = collection.find(Filters.eq("username", username)).first();
         
         if (doc.get("password").equals(password)) {
             return true;
@@ -38,7 +41,8 @@ public class Auth {
 
     public static String[] getUserInfo(String username) {
         
-        Document doc = users.find(Filters.eq("username", username)).first();
+        collection = database.getCollection("user_info");
+        Document doc = collection.find(Filters.eq("username", username)).first();
         String[] data = new String[3];
         data[0] = doc.getString("username");
         data[1] = doc.getString("fullname");
@@ -48,11 +52,12 @@ public class Auth {
 
     public static boolean isRegistered(String email, String username) {
         
-        Document doc = users.find(Filters.eq("email", email)).first();
+        collection = database.getCollection("user_info");
+        Document doc = collection.find(Filters.eq("email", email)).first();
         if (doc != null) {
             return true;
         }
-        doc = users.find(Filters.eq("username", username)).first();
+        doc = collection.find(Filters.eq("username", username)).first();
         if (doc != null) {
             return true;
         }
@@ -61,12 +66,13 @@ public class Auth {
 
     public static boolean addNewUser(String username, String password, String fullname, String email) {
         
+        collection = database.getCollection("user_info");
         Document doc = new Document("username", username)
                 .append("password", password)
                 .append("fullname", fullname)
                 .append("email", email);
         try {
-            users.insertOne(doc);
+            collection.insertOne(doc);
             return true;
         } catch (Exception e) {
             return false;
@@ -74,15 +80,50 @@ public class Auth {
     }
 
     public static void updateLogin(String username) {
-        users = database.getCollection("login_history");
-        Document doc = users.find(Filters.eq("username", username)).first();
+    
+        collection = database.getCollection("login_history");
+        Document doc = collection.find(Filters.eq("username", username)).first();
         if (doc == null) {
             doc = new Document("username", username)
                     .append("last_login", new Date().getTime());
-            users.insertOne(doc);
+            collection.insertOne(doc);
         } else {
-            users.updateOne(Filters.eq("username", username), new Document("$set", new Document("last_login", new Date().getTime())));
+            collection.updateOne(Filters.eq("username", username), new Document("$set", new Document("last_login", new Date().getTime())));
         }
     }
 
+    public static ArrayList<Assignment> getAssignments(String username) {
+     
+        init();
+        collection = database.getCollection("assignments");
+        Document doc = collection.find(Filters.eq("username", username)).first();
+        if (doc != null) {
+            ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+            ArrayList<Document> docs = (ArrayList<Document>) doc.get("assignment_list");
+            for (Document d : docs) {
+                assignments.add(new Assignment(d.getString("title"), d.getString("description"), d.getString("deadline").toString(), d.getBoolean("finished")));
+            }
+            return assignments;
+        }
+        return null;
+    }
+
+    public static void addAssignment(String username, String title, String dueDate, String description) {
+        
+        init();
+        collection = database.getCollection("assignments");
+        Document doc = collection.find(Filters.eq("username", username)).first();
+        if (doc == null) {
+            doc = new Document("username", username)
+                    .append("assignment_list", new ArrayList<Document>());
+            collection.insertOne(doc);
+        }
+        ArrayList<Document> docs = (ArrayList<Document>) doc.get("assignment_list");
+        Document assignment = new Document("title", title)
+                .append("description", description)
+                .append("deadline", dueDate)
+                .append("finished", false);
+        docs.add(assignment);
+        collection.updateOne(Filters.eq("username", username), new Document("$set", new Document("assignment_list", docs)));
+    }
 }

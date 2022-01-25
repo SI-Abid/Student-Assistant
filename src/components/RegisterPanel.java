@@ -10,6 +10,7 @@ import javax.swing.plaf.basic.BasicPanelUI;
 
 import utils.Auth;
 import utils.Home;
+import utils.User;
 import utils.Color;
 
 public class RegisterPanel implements Panel {
@@ -112,7 +113,7 @@ public class RegisterPanel implements Panel {
 
         register = new JButton("Register");
         register.setBounds(startX+ labelWidth + GAP, confirmPasswordLabel.getY()+35, 100, 25);
-        register.setBackground(Color.LIGHT_BLUE);
+        register.setBackground(Color.DARK_BLUE);
         register.setForeground(Color.WHITE);
         register.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         register.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -128,9 +129,11 @@ public class RegisterPanel implements Panel {
         register.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 register.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                register.setBackground(Color.LIGHT_BLUE);
             }
             public void mouseExited(MouseEvent e) {
                 register.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                register.setBackground(Color.DARK_BLUE);
             }
         });
 

@@ -7,8 +7,6 @@ import utils.Color;
 public class TodoListPanel implements Panel {
 
     JPanel panel;
-    int width = 640;
-    int height = 600;
     public TodoListPanel() {
         init();
     }

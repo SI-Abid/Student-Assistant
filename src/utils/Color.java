@@ -16,7 +16,7 @@ public class Color extends java.awt.Color {
     public static final Color DARK_PURPLE = new Color(128, 0, 128);
     public static final Color LIGHT_GREEN = new Color(10, 150, 15);
     public static final Color DARK_GREEN = new Color(0, 128, 0);
-    public static final Color LIGHT_BLUE = new Color(0, 0, 255);
+    public static final Color LIGHT_BLUE = new Color(0, 180, 225);
     public static final Color DARK_BLUE = new Color(0, 0, 128);
     public static final Color LIGHT_RED = new Color(255, 0, 0);
     public static final Color DARK_RED = new Color(128, 0, 0);

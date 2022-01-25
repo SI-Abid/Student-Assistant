@@ -5,6 +5,7 @@ import javax.swing.plaf.basic.BasicPanelUI;
 
 import utils.Auth;
 import utils.Home;
+import utils.User;
 import utils.Color;
 
 import java.awt.Font;
@@ -150,8 +151,6 @@ public class LoginPanel implements Panel {
             
             JPanel clock = new ClockPanel().getPanel();
             Home.addPanel(clock, new Rectangle(Home.getWidth() - profile.getWidth(), profile.getHeight(), clock.getWidth(), clock.getHeight()));
-            
-            
 
             JPanel dashboard = new DashBoard().getPanel();
             Home.addPanel(dashboard, new Rectangle(Home.getWidth()-dashboard.getWidth(), profile.getHeight()+clock.getHeight(), dashboard.getWidth(), dashboard.getHeight()));

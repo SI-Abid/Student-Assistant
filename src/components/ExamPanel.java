@@ -1,14 +1,12 @@
 package components;
 
-import java.awt.Color;
+import utils.Color;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class ExamPanel implements Panel{
 
     JPanel panel;
-    int width = 640;
-    int height = 600;
     public ExamPanel() {
         init();
     }
@@ -18,18 +16,17 @@ public class ExamPanel implements Panel{
         panel.setSize(width, height);
         panel.setLayout(null);
         panel.setBackground(Color.RED);
+        panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
     }
 
     @Override
     public void getLinkedPanel(Type type) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public JPanel getPanel() {
-        // TODO Auto-generated method stub
         return panel;
     }
     

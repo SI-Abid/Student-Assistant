@@ -6,6 +6,7 @@ import java.awt.Image;
 import javax.swing.*;
 
 import utils.Home;
+import utils.User;
 import utils.Color;
 
 public class ProfilePanel implements Panel {
@@ -16,12 +17,10 @@ public class ProfilePanel implements Panel {
     JLabel emailLabel;
     JLabel userImage;
     JButton logout;
-    User user;
     int width = 160;
-    int height = 220;
+    int height = 250;
     
     public ProfilePanel(User user) {
-        this.user = user;
         init();
     }
 
@@ -40,17 +39,25 @@ public class ProfilePanel implements Panel {
         userImage.setIcon(new ImageIcon(img));
         panel.add(userImage);
 
+        // welcome message
+        JLabel welcome = new JLabel("Welcome to");
+        welcome.setBounds(10, 120, 140, 20);
+        welcome.setForeground(Color.WHITE);
+        welcome.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        welcome.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(welcome);
+
         // add username
-        usernameLabel = new JLabel(user.Username);
-        usernameLabel.setBounds(10, 120, 140, 20);
+        usernameLabel = new JLabel(User.getUsername());
+        usernameLabel.setBounds(10, 150, 140, 20);
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         usernameLabel.setForeground(Color.WHITE);
         panel.add(usernameLabel);
 
         // add fullname
-        fullnameLabel = new JLabel(user.FullName);
-        fullnameLabel.setBounds(10, 150, 140, 20);
+        fullnameLabel = new JLabel(User.getFullName());
+        fullnameLabel.setBounds(10, 180, 140, 20);
         fullnameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         fullnameLabel.setHorizontalAlignment(JLabel.CENTER);
         fullnameLabel.setForeground(Color.WHITE);
@@ -58,7 +65,7 @@ public class ProfilePanel implements Panel {
 
         // add logout button
         logout = new JButton("LOGOUT");
-        logout.setBounds(40, 180, 80, 20);
+        logout.setBounds(40, 210, 80, 20);
         logout.setFont(new Font("Arial", Font.BOLD, 12));
         logout.setBackground(Color.YELLOW);
         logout.setForeground(Color.BLACK);
@@ -78,7 +85,6 @@ public class ProfilePanel implements Panel {
     public void getLinkedPanel(Type type) {
         Home.removeAllPanels();
         if(type == Type.LOGIN) {
-            user=null;
             Home.addPanel(new LoginPanel().getPanel());
         }
     }

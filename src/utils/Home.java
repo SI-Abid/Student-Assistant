@@ -59,7 +59,7 @@ public class Home {
         layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(width / 2 - panel.getWidth() / 2, height / 2 - panel.getHeight() / 2, panel.getWidth(), panel.getHeight());
-        panel.setOpaque(true);
+        panel.setOpaque(false);
     }
     /**
      * Add panel according to the position
@@ -70,7 +70,7 @@ public class Home {
         layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(bounds);
-        panel.setOpaque(true);
+        panel.setOpaque(false);
     }
     /**
      * Remove panel from the frame
@@ -91,6 +91,7 @@ public class Home {
      * remove all panels from default layer
      */
     public static void removeAllPanels() {
+        removeContent();
         Component[] c = layeredPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
         for (Component component : c) {
             component.setVisible(false);
@@ -102,7 +103,7 @@ public class Home {
         layeredPane.add(panel, JLayeredPane.PALETTE_LAYER);
         layeredPane.moveToFront(panel);
         panel.setBounds(5, 5, panel.getWidth(), panel.getHeight());
-        panel.setOpaque(true);
+        panel.setOpaque(false);
     }
 
     public static void removeContent() {

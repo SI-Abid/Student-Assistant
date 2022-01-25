@@ -7,8 +7,6 @@ import utils.Color;
 public class NotePanel implements Panel {
 
     JPanel panel;
-    int width = 640;
-    int height = 600;
     
     public NotePanel() {
         init();
