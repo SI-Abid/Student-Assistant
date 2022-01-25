@@ -26,22 +26,26 @@ public class DashBoard implements Panel{
         
         JButton examButton = new JButton("Exam");
         examButton.setBounds(gap, gap, width-gap*2, height/4-gap*2);
-        examButton.setBackground(Color.RED);
+        examButton.setForeground(Color.WHITE);
+        examButton.setBackground(Color.DARK_PURPLE);
         panel.add(examButton);
 
         JButton assignmentButton = new JButton("Assignment");
         assignmentButton.setBounds(gap, height/4+gap, width-gap*2, height/4-gap*2);
-        assignmentButton.setBackground(Color.LIGHT_BLUE);
+        assignmentButton.setForeground(Color.WHITE);
+        assignmentButton.setBackground(Color.DARK_RED);
         panel.add(assignmentButton);
 
         JButton todoButton = new JButton("Todo");
         todoButton.setBounds(gap, height/2+gap, width-gap*2, height/4-gap*2);
-        todoButton.setBackground(Color.YELLOW);
+        todoButton.setForeground(Color.WHITE);
+        todoButton.setBackground(Color.DARK_YELLOW);
         panel.add(todoButton);
 
         JButton noteButton = new JButton("Note");
         noteButton.setBounds(gap, height/2 + height/4 +gap, width-gap*2, height/4-gap*2);
-        noteButton.setBackground(Color.GREEN);
+        noteButton.setForeground(Color.WHITE);
+        noteButton.setBackground(Color.DARK_GREEN);
         panel.add(noteButton);
 
         examButton.addActionListener(l -> getLinkedPanel(Type.EXAM));

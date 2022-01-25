@@ -57,8 +57,14 @@ public class User {
     }
 
     public static void addAssignment(Assignment assignment) {
+        if(assignments==null) {
+            assignments=new ArrayList<Assignment>();
+        }
         assignments.add(assignment);
-        Auth.addAssignment(Username, assignment);
+        // Auth.addAssignment(Username, assignment);
     }
-
+    public static void removeAssignment(Assignment assignment) {
+        assignments.remove(assignment);
+        // Auth.removeAssignment(Username, assignment);
+    }
 }

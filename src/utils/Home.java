@@ -3,6 +3,8 @@ package utils;
 import java.awt.Image;
 import java.awt.Component;
 import java.awt.Rectangle;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
@@ -23,6 +25,31 @@ public class Home {
 
         frame = new JFrame("Student Assistant");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // task done when frame closed
+        frame.addWindowListener(new WindowListener() {
+
+            public void windowClosing(WindowEvent e) {
+                Auth.update();
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {}
+
+            @Override
+            public void windowClosed(WindowEvent e) {}
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {}
+
+            @Override
+            public void windowOpened(WindowEvent e) {}
+        });
         frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

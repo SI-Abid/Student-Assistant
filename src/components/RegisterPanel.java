@@ -1,9 +1,10 @@
 package components;
 
 import java.awt.Font;
-import java.awt.Insets;
+// import java.awt.Insets;
 import java.awt.Cursor;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicPanelUI;
@@ -56,7 +57,7 @@ public class RegisterPanel implements Panel {
         fullname.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
         fullname.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         // give leading space to the text field
-        fullname.setMargin(new Insets(0, 10, 0, 10));
+        // fullname.setMargin(new Insets(0, 10, 0, 10));
         fullname.setBackground(Color.LIGHT_GRAY);
         fullname.setForeground(Color.BLACK);
         panel.add(fullname);
@@ -129,7 +130,7 @@ public class RegisterPanel implements Panel {
         register.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 register.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                register.setBackground(Color.LIGHT_BLUE);
+                register.setBackground(Color.BLUE);
             }
             public void mouseExited(MouseEvent e) {
                 register.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -173,6 +174,8 @@ public class RegisterPanel implements Panel {
         String fullname = this.fullname.getText();
         String username = this.username.getText();
         String email = this.email.getText();
+
+    
         String password = new String(this.password.getPassword());
         String confirmPassword = new String(this.confirmPassword.getPassword());
         if (fullname.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("")) {
@@ -180,6 +183,16 @@ public class RegisterPanel implements Panel {
         } else if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(null, "Passwords do not match");
         } else {
+
+            if (Auth.isValidEmail(email)) {
+                JOptionPane.showMessageDialog(null, "Invalid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if (Auth.isStrongPassword(password)) {
+                JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long, contain at least one number, one uppercase letter, one lowercase letter and one special character");
+                return;
+            }
             Auth.init();
             if (new User().register(fullname, username, password, email)) {
                 JOptionPane.showMessageDialog(null, "Registration Successful");

@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import utils.Home;
 import utils.User;
+import utils.Auth;
 import utils.Color;
 
 public class ProfilePanel implements Panel {
@@ -64,10 +65,10 @@ public class ProfilePanel implements Panel {
         panel.add(fullnameLabel);
 
         // add logout button
-        logout = new JButton("LOGOUT");
+        logout = new JButton("LogOut");
         logout.setBounds(40, 210, 80, 20);
         logout.setFont(new Font("Arial", Font.BOLD, 12));
-        logout.setBackground(Color.YELLOW);
+        logout.setBackground(Color.WHITE);
         logout.setForeground(Color.BLACK);
         logout.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(logout);
@@ -87,6 +88,7 @@ public class ProfilePanel implements Panel {
         if(type == Type.LOGIN) {
             Home.addPanel(new LoginPanel().getPanel());
         }
+        Auth.update();
     }
     
 }

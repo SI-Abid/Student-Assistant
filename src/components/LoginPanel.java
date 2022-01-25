@@ -9,9 +9,8 @@ import utils.User;
 import utils.Color;
 
 import java.awt.Font;
-import java.awt.Insets;
+// import java.awt.Insets;
 import java.awt.Rectangle;
-// import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.*;
 
@@ -49,7 +48,7 @@ public class LoginPanel implements Panel {
         username.setBounds(150, 60, 200, 20);
         username.setFont(new Font("Arial", Font.PLAIN, 14));
         username.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        username.setMargin(new Insets(0, 10, 0, 10));
+        // username.setMargin(new Insets(0, 10, 0, 10));
         username.setBackground(Color.LIGHT_GRAY);
         username.setForeground(Color.BLACK);
         panel.add(username);
@@ -70,7 +69,7 @@ public class LoginPanel implements Panel {
         login = new JButton("Sign In");
         login.setBounds(150, 130, 120, 25);
         login.setFont(new Font("Arial", Font.BOLD, 15));
-        login.setBackground(Color.LIGHT_GREEN);
+        login.setBackground(Color.DARK_GREEN);
         login.setForeground(Color.WHITE);
         login.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(login);
@@ -92,7 +91,7 @@ public class LoginPanel implements Panel {
             @Override
             public void mouseExited(MouseEvent e) {
                 login.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                login.setBackground(Color.LIGHT_GREEN);
+                login.setBackground(Color.DARK_GREEN);
             }
         });
 
