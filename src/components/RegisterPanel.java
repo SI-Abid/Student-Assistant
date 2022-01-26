@@ -184,12 +184,13 @@ public class RegisterPanel implements Panel {
             JOptionPane.showMessageDialog(null, "Passwords do not match");
         } else {
 
-            if (Auth.isValidEmail(email)) {
+            if (!Auth.isValidEmail(email)) {
                 JOptionPane.showMessageDialog(null, "Invalid email address", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            if (Auth.isStrongPassword(password)) {
+            if (!Auth.isStrongPassword(password)) {
+                // show message dialog in multiple lines
                 JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long, contain at least one number, one uppercase letter, one lowercase letter and one special character");
                 return;
             }

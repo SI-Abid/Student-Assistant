@@ -29,7 +29,8 @@ public class Home {
         frame.addWindowListener(new WindowListener() {
 
             public void windowClosing(WindowEvent e) {
-                Auth.update();
+                if(User.isLoggedIn)
+                    Auth.update();
             }
 
             @Override
