@@ -1,8 +1,8 @@
-nijer part update korte ja kora lage
+update local repo
 - fetch upstream
 - pull
 
-nijer contribution share korte ja kora lage
+contribute to main branch
 - commit
 - push
 - pull request
